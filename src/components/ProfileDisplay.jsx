@@ -16,7 +16,6 @@ function ProfileDisplay() {
     
     function UserGreeting() {
         let days = selectedProfile.days;
-        console.log(days)
         let dayIndex = days.findIndex(day => day.date === currentDate);
 
         return (
