@@ -13,7 +13,9 @@ function bmiReducer(state, action) {
             case 'ADD_DAY':
                 const { profileIndex, dayData } = action.payload;
                 const updatedState = [...state];
-                console.log(profileIndex)
+                if ( !updatedState[profileIndex].days){
+                    updatedState[profileIndex].days = []
+                }
                 updatedState[profileIndex].days = [...updatedState[profileIndex].days, dayData];
                 localStorage.setItem('profiles', JSON.stringify(updatedState));
                 return updatedState;
