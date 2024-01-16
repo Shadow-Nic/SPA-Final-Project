@@ -9,11 +9,13 @@ function ProfileDisplay() {
             {selectedProfile && (
                 <div>
                     <h2>{selectedProfile.name}'s Profile</h2>
+                    <p>Age: {selectedProfile.age}</p>
                     <p>Height: {selectedProfile.height}</p>
                     <p>
                         Weight: {selectedProfile.weightKg} kg / {selectedProfile.weightLbs} lbs
                     </p>
                     <p>BMI: {selectedProfile.bmi}</p>
+                    <p>BMR: {selectedProfile.bmr}</p>
                     <p>Category: {selectedProfile.category}</p>
                 </div>
             )}

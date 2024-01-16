@@ -10,6 +10,8 @@ function BmiCalculator() {
     const [weightLbs, setWeightLbs] = useState('');
     const [unit, setUnit] = useState('kg');
     const [name, setName] = useState('');
+    const [age, setAge] = useState('');
+    const [gender, setGender] = useState('');
 
     const handleHeightChange = (event) => {
         setHeight(event.target.value);
@@ -34,7 +36,26 @@ function BmiCalculator() {
         setName(event.target.value);
     };
 
+    const handleAgeChange = (event) => {
+        setAge(event.target.value);
+    };
+
+    const handleGenderChange = (event) => {
+        setGender(event.target.value);
+    };
+
+    const calculateBmr = () => {
+        let bmrVal = 0;
+        if (gender === 'male') {
+            bmrVal = 10 * weightKg + 6.26 * height - 5 * age + 5;
+        } else {
+            bmrVal = 10 * weightKg + 6.26 * height - 5 * age - 161;
+        }
+        return Math.round(bmrVal);
+    };
+
     const calculateBmi = () => {
+        let bmrVal = calculateBmr();
         if (height && weightKg) {
             const heightInMeters = height / 100;
             const bmiVal = (weightKg / (heightInMeters * heightInMeters)).toFixed(2);
@@ -50,7 +71,18 @@ function BmiCalculator() {
             }
             dispatch({
                 type: 'ADD_PROFILE',
-                payload: { name, height, weightKg, weightLbs, unit, bmi: bmiVal, category: categoryMsg },
+                payload: {
+                    name,
+                    height,
+                    weightKg,
+                    weightLbs,
+                    unit,
+                    gender,
+                    age,
+                    bmr: bmrVal,
+                    bmi: bmiVal,
+                    category: categoryMsg,
+                },
             });
             navigate('/');
         }
@@ -61,6 +93,10 @@ function BmiCalculator() {
             <label>
                 Name:
                 <input type="text" value={name} onChange={handleNameChange} />
+            </label>
+            <label>
+                Age:
+                <input type="number" value={age} onChange={handleAgeChange} />
             </label>
             <label>
                 Height (cm):
@@ -75,6 +111,13 @@ function BmiCalculator() {
                 <select value={unit} onChange={handleUnitChange}>
                     <option value="kg">Kilograms</option>
                     <option value="lbs">Pounds</option>
+                </select>
+            </label>
+            <label>
+                Gender:
+                <select value={unit} onChange={handleGenderChange}>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
             </label>
             <button onClick={calculateBmi}>Calculate BMI</button>
