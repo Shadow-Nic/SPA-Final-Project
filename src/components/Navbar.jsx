@@ -16,7 +16,6 @@ function Navbar() {
             <Link to="/day">Input Day</Link>
 
             <select value={JSON.stringify(selectedProfile)} onChange={handleProfileSelect}>
-                <option value="">Select Profile</option>
                 {state.map((profile, index) => (
                     <option key={index} value={JSON.stringify(profile)}>
                         {profile.name}
