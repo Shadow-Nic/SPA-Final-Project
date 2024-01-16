@@ -33,7 +33,7 @@ function ProfileDisplay() {
                         borderColor={['black', 'black']}
                     />
                     <BmrChart
-                        labels={['Today Fats', 'Today Protein', 'Today Carbs']}
+                        labels={['Fats', 'Protein', 'Carbs']}
                         data={[selectedProfile.todayFats, selectedProfile.todayProteins, selectedProfile.todayCarbs]}
                         backgroundColor={['red', 'blue', 'yellow']}
                         borderColor={['black', 'black']}
