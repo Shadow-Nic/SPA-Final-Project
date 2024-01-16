@@ -10,6 +10,14 @@ function addDay() {
     const selectedProfileIndex = state.findIndex(profile => profile === selectedProfile);
 
 
+    const date = new Date();
+    const currentDate = date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit'
+    }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, "$1.$2.$3");
+
+
     // Fürs profile daten:
     const [todayCalories, setTodayCalories] = useState(1000);
     const [todayFats, setTodayFats] = useState(200);
@@ -38,6 +46,7 @@ function addDay() {
             payload: {
                 profileIndex: selectedProfileIndex,
                 dayData: {
+                    date: currentDate,
                     todayCalories,
                     todayProteins,
                     todayFats,
