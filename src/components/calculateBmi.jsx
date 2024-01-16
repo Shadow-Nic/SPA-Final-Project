@@ -12,6 +12,20 @@ function BmiCalculator() {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
+    // Fürs profile daten:
+    const [todayCalories, setTodayCalories] = useState(1000);
+    const [todayFats, setTodayFats] = useState(200);
+    const [todayProteins, setTodayProteins] = useState(80);
+    const [todayCarbs, setTodayCarbs] = useState(300);
+
+    const addNutrients = (calories, fats, proteins, carbs) => {
+        setTodayCalories((prevCalories) => prevCalories + calories);
+        setTodayFats((prevFats) => prevFats + fats);
+        setTodayProteins((prevProteins) => prevProteins + proteins);
+        setTodayCarbs((prevCarbs) => prevCarbs + carbs);
+    };
+
+    //   ende profil daten
 
     const handleHeightChange = (event) => {
         setHeight(event.target.value);
@@ -82,6 +96,10 @@ function BmiCalculator() {
                     bmr: bmrVal,
                     bmi: bmiVal,
                     category: categoryMsg,
+                    todayCalories,
+                    todayProteins,
+                    todayFats,
+                    todayCarbs,
                 },
             });
             navigate('/');
