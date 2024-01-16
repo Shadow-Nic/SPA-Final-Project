@@ -13,6 +13,7 @@ function Navbar() {
     return (
         <nav>
             <Link to="/">Stats</Link>
+            <Link to="/day">Input Day</Link>
 
             <select value={JSON.stringify(selectedProfile)} onChange={handleProfileSelect}>
                 <option value="">Select Profile</option>

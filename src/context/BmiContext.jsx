@@ -9,6 +9,15 @@ function bmiReducer(state, action) {
             const newState = [...state, action.payload];
             localStorage.setItem('profiles', JSON.stringify(newState));
             return newState;
+
+            case 'ADD_DAY':
+                const { profileIndex, dayData } = action.payload;
+                const updatedState = [...state];
+                console.log(profileIndex)
+                updatedState[profileIndex].days = [...updatedState[profileIndex].days, dayData];
+                localStorage.setItem('profiles', JSON.stringify(updatedState));
+                return updatedState;
+
         default:
             throw new Error(`Unknown action: ${action.type}`);
     }
