@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BmiContext } from '../context/BmiContext';
 import { Popover, Whisper } from 'rsuite';
 import '../Style/addDay.css'
-import DoughnutChart from './dailyChart';
+
 
 
 function addDay() {
@@ -110,12 +110,7 @@ function addDay() {
         <div className='addDay'>
             <div className='display'>
                 <div className='con1'>
-                    <DoughnutChart
-                        labels={['Fats', 'Protein', 'Carbs']}
-                        data={[todayFats, todayProteins, todayCarbs]}
-                        backgroundColor={['red', 'blue', 'yellow']}
-                        borderColor={['black', 'black']}
-                    />
+
                 </div>
                 <div className='con2'>
                     <p>Today's Calories: {todayCalories}</p>

@@ -37,7 +37,7 @@ const MonthlyChart = ({ data }) => {
     };
 
     return (
-        <div>
+        <div style={{ width: '300px', height: '150px', display: 'flex' }}>
             <Bar
                 data={chartData}
                 options={{
