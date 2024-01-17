@@ -37,28 +37,31 @@ const MonthlyChart = ({ data }) => {
     };
 
     return (
-        <div style={{ width: '300px', height: '150px', display: 'flex' }}>
-            <Bar
-                data={chartData}
-                options={{
-                    title: {
-                        display: true,
-                        text: 'Weekly Calories',
-                        fontSize: 24,
-                    },
-                    legend: {
-                        display: true,
-                        position: 'top',
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+            <p style={{ marginBottom: '0' }}>Monthly</p>
+            <div style={{ width: '300px', height: '150px', display: 'flex' }}>
+                <Bar
+                    data={chartData}
+                    options={{
+                        title: {
+                            display: true,
+                            text: 'Weekly Calories',
+                            fontSize: 24,
                         },
-                    },
-                }}
-            />
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    }}
+                />
+            </div>
         </div>
     );
 };
