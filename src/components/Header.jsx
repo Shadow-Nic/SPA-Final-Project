@@ -35,6 +35,7 @@ const Header = () => {
              <Dropdown.Item as={Link} to="/">Profile</Dropdown.Item>
              <Dropdown.Item as={Link} to="/day">Input Day</Dropdown.Item>
              <Dropdown.Item as={Link} to="/calculator">Add new Profile</Dropdown.Item>
+             <Dropdown.Item as={Link} to="/calendar">Calendar</Dropdown.Item>
            </Dropdown>
          </div>
        </div>
