@@ -7,6 +7,7 @@ function Navbar() {
     const { state, selectedProfile, setSelectedProfile } = useContext(BmiContext);
 
     const handleProfileSelect = (event) => {
+       
         setSelectedProfile(JSON.parse(event.target.value));
     };
 

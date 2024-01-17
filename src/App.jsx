@@ -17,8 +17,7 @@ function App() {
         <>
             <Router>
                 <BmiProvider>
-                    <Header></Header>
-                    <Navbar />
+                    <Header/>
                     <Routes>
                         <Route path="/" element={<ProfileDisplay />} />
                         <Route path="/day" element={<DayPlan />} />
