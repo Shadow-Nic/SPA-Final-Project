@@ -4,6 +4,8 @@ import DayChart from './dailyChart';
 import '../Style/Profile.css'
 import WeekChart from './weekChart';
 import MonthlyChart from './monthlyChart';
+import { Carousel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function ProfileDisplay() {
@@ -22,30 +24,33 @@ function ProfileDisplay() {
     function UserGreeting() {
         let days = selectedProfile.days;
         let dayIndex = days.findIndex(day => day.date === currentDate);
-
+     
         return (
             <div className='Charts'>
-                <DayChart
-                    data={selectedProfile.days[dayIndex]}
-                />
-                <WeekChart
-                    data={days}
-                />
-                <MonthlyChart
-                    data={days} />
+                <Carousel controls={false}>
+                    <Carousel.Item>
+                       <DayChart
+                           data={selectedProfile.days[dayIndex]}
+                       />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                       <WeekChart
+                           data={days}
+                       />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                       <MonthlyChart
+                           data={days} />
+                    </Carousel.Item>
+                </Carousel>
             </div>
-
         );
-    }
+     }
 
-    function Greeting() {
-
-        if (selectedProfile.days) {
-            return <UserGreeting />;
-        }
-
-
-    }
+     function Greeting() {
+        return selectedProfile && <UserGreeting />;
+     }
+     
 
     return (
         <div>
@@ -63,11 +68,13 @@ function ProfileDisplay() {
                     {/* <p>Today`s Burned Calories</p>                           Tägliche Kalorien abnahme (muss noch implentiert werden)         */}
                     <p>Category: {selectedProfile.category}</p>
 
-                    <Greeting />
+                    
 
                 </div>
+                
             )}
-
+                <div className='statistik'><Greeting />
+                </div>
         </div>
     );
 }
