@@ -2,7 +2,9 @@ import Chart from 'chart.js/auto';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const BmrChart = ({ title, labels, data, backgroundColor, borderColor }) => {
+
+const DoughnutChart = ({ labels, data, backgroundColor, borderColor }) => {
+
     const chartRef = React.useRef(null);
     const chartData = {
         labels: labels,
@@ -27,11 +29,15 @@ const BmrChart = ({ title, labels, data, backgroundColor, borderColor }) => {
     };
 
     return (
+
         <div style={{ width: '150px', height: '150px' }} className="Chart">
             <p>{title}</p>
+
+
+
             <Doughnut ref={chartRef} data={chartData} options={options} />
         </div>
     );
 };
 
-export default BmrChart;
+export default DoughnutChart;
