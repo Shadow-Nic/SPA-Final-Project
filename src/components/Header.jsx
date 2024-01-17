@@ -10,9 +10,12 @@ const Header = () => {
     return (
      <header>
        <div className="header">
+        <div className='profilpic'>
+        <img src="/src/assets/Default_Profile_Picture.svg.png" alt="Profilepic" />
+        </div>
          <img src="/src/assets/Logo-NoBG.png" alt="Fitify Logo" />
          <div className="menue">
-           <Dropdown title={<FontAwesomeIcon icon={faBars} />}>
+           <Dropdown title={<FontAwesomeIcon icon={faBars} size="2x" />}>
              <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
              <Dropdown.Item as={Link} to="/eat">Eat</Dropdown.Item>
              <Dropdown.Item as={Link} to="/sports">Sports</Dropdown.Item>
