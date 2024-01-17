@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BmiContext } from '../context/BmiContext';
 import { Popover, Whisper } from 'rsuite';
 import '../Style/addDay.css'
-import DoughnutChart from './chart';
+import DoughnutChart from './dailyChart';
 
 
 function addDay() {

@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import DoughnutChart from './chart';
+import DoughnutChart from './dailyChart';
 import '../Style/Profile.css'
+import WeekChart from './weekChart';
+import MonthlyChart from './monthlyChart';
 
 
 function ProfileDisplay() {
@@ -16,12 +18,15 @@ function ProfileDisplay() {
     }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, "$1.$2.$3"); //12.12.12 > 12 december 2012
 
 
+
     function UserGreeting() {
         let days = selectedProfile.days;
         let dayIndex = days.findIndex(day => day.date === currentDate);
 
+
         return (
-            <div>
+            <div className='Charts'>
+
                 <DoughnutChart
                     labels={['Left', 'TODAY Calories']}
                     data={[
@@ -41,10 +46,17 @@ function ProfileDisplay() {
                     backgroundColor={['red', 'blue', 'yellow']}
                     borderColor={['black', 'black']}
                 />
+
+                <WeekChart
+                    data={days}
+                />
+                <MonthlyChart
+                    data={days} />
             </div>
 
         );
     }
+
     function Greeting() {
 
         if (selectedProfile.days) {
@@ -74,6 +86,7 @@ function ProfileDisplay() {
 
                 </div>
             )}
+
         </div>
     );
 }
