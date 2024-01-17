@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
 import DoughnutChart from './chart';
+import '../Style/Profile.css'
 
 
 function ProfileDisplay() {

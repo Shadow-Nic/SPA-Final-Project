@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BmiContext } from '../context/BmiContext';
+import { Popover, Whisper } from 'rsuite';
 import '../Style/addDay.css'
 import DoughnutChart from './chart';
 
@@ -67,10 +68,10 @@ function addDay() {
     };
 
 
-    const handleWeight = (index) => {
+    const handleWeight = (index, weight) => {
         // berechnet die Nährstoffe der Menge die der User zu sich genommen hat
         const food = nutritionFacts[index];
-        const weightInput = prompt(`Please enter the weight of ${food.name} in grams:`);
+        const weightInput = window.prompt(`Please enter the weight of ${food.name} in grams:`);
         if (weightInput) {
             const weight = parseFloat(weightInput);
 
