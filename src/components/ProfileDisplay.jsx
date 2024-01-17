@@ -48,9 +48,12 @@ function ProfileDisplay() {
     }
 
     function Greeting() {
-        return selectedProfile && <UserGreeting />;
+        if (selectedProfile) {
+            if (selectedProfile.days) {
+                return <UserGreeting />;
+            }
+        }
     }
-
 
     return (
         <div>
