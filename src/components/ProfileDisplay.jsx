@@ -73,7 +73,8 @@ function ProfileDisplay() {
                 </div>
                 
             )}
-                <div className='statistik'><Greeting />
+                <div className='statistik'>
+                    <Greeting />
                 </div>
         </div>
     );
