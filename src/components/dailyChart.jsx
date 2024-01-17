@@ -71,12 +71,15 @@ const DayChart = ({ data }) => {
 
     return (
 
-        <div style={{ width: '300px', height: '150px', display: 'flex' }}>
-            <div style={{ width: '50%', float: 'left' }}>
-                <Doughnut ref={chartRef} data={chartDataCal} options={optionsCal} />
-            </div>
-            <div style={{ width: '50%', float: 'left' }}>
-                <Doughnut ref={chartRef} data={chartDataNut} options={optionsNut} />
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+            <p style={{ marginBottom: '0' }}>Daily</p>
+            <div style={{ width: '300px', height: '150px', display: 'flex' }}>
+                <div style={{ width: '50%', float: 'left' }}>
+                    <Doughnut ref={chartRef} data={chartDataCal} options={optionsCal} />
+                </div>
+                <div style={{ width: '50%', float: 'right' }}>
+                    <Doughnut ref={chartRef} data={chartDataNut} options={optionsNut} />
+                </div>
             </div>
         </div>
     );
