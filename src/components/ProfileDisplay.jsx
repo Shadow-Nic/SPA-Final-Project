@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import DoughnutChart from './dailyChart';
+import DayChart from './dailyChart';
 import '../Style/Profile.css'
 import WeekChart from './weekChart';
 import MonthlyChart from './monthlyChart';
@@ -23,30 +23,11 @@ function ProfileDisplay() {
         let days = selectedProfile.days;
         let dayIndex = days.findIndex(day => day.date === currentDate);
 
-
         return (
             <div className='Charts'>
-
-                <DoughnutChart
-                    labels={['Left', 'TODAY Calories']}
-                    data={[
-                        (selectedProfile.bmr - selectedProfile.days[dayIndex].todayCalories),
-                        selectedProfile.days[dayIndex].todayCalories,
-                    ]}
-                    backgroundColor={['green', 'blue']}
-                    borderColor={['black', 'black']}
+                <DayChart
+                    data={selectedProfile.days[dayIndex]}
                 />
-                <DoughnutChart
-                    labels={['Fats', 'Protein', 'Carbs']}
-                    data={[
-                        selectedProfile.days[dayIndex].todayFats,
-                        selectedProfile.days[dayIndex].todayProteins,
-                        selectedProfile.days[dayIndex].todayCarbs,
-                    ]}
-                    backgroundColor={['red', 'blue', 'yellow']}
-                    borderColor={['black', 'black']}
-                />
-
                 <WeekChart
                     data={days}
                 />
