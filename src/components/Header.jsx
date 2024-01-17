@@ -15,7 +15,7 @@ const Header = () => {
         </div>
          <img src="/src/assets/Logo-NoBG.png" alt="Fitify Logo" />
          <div className="menue">
-           <Dropdown title={<FontAwesomeIcon icon={faBars} size="2x" />}>
+           <Dropdown title={<FontAwesomeIcon icon={faBars} size="3x" />}>
              <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
              <Dropdown.Item as={Link} to="/eat">Eat</Dropdown.Item>
              <Dropdown.Item as={Link} to="/sports">Sports</Dropdown.Item>
