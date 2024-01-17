@@ -10,7 +10,7 @@ header {
 }
 
 .header {
-    width: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@ header {
 
 .header img {
     width: 200px;
-    margin-left: 100px;
+    margin-left: 15%;
     
 }
 
@@ -27,13 +27,13 @@ header {
     border-style: none;
     background-color: transparent;
     color: #E09836;
-    padding-left: 40px;
+    padding-left: 55%;
     
 }
 
 .profilpic img {
     position:absolute;
     width: 50px;
-    left: -80px;
-    top: 20px;
+    left: -10%;
+    top: 2%;
 }
