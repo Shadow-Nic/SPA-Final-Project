@@ -4,7 +4,7 @@ import BmrChart from './chart';
 
 function ProfileDisplay() {
     const { selectedProfile } = useContext(BmiContext);
-   
+
 
     const date = new Date();
     const currentDate = date.toLocaleDateString('en-GB', {
@@ -13,24 +13,18 @@ function ProfileDisplay() {
         year: '2-digit'
     }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, "$1.$2.$3"); //12.12.12 > 12 december 2012
 
-    
+
     function UserGreeting() {
         let days = selectedProfile.days;
         let dayIndex = days.findIndex(day => day.date === currentDate);
 
         return (
             <div>
-                <div>
-                    <p>Today's calories: {selectedProfile.days[dayIndex].todayCalories}</p>
-                    <p>Today's fats: {selectedProfile.days[dayIndex].todayFats}</p>
-                    <p>Today's proteins: {selectedProfile.days[dayIndex].todayProteins}</p>
-                    <p>Today's carbs: {selectedProfile.days[dayIndex].todayCarbs}</p>
-                </div>
                 <BmrChart
                     labels={['Left', 'TODAY Calories']}
                     data={[
-                        selectedProfile.bmr - selectedProfile.days[dayIndex].todayCalories,
-                        selectedProfile.days[0].todayCalories,
+                        (selectedProfile.bmr - selectedProfile.days[dayIndex].todayCalories),
+                        selectedProfile.days[dayIndex].todayCalories,
                     ]}
                     backgroundColor={['green', 'blue']}
                     borderColor={['black', 'black']}
@@ -50,14 +44,13 @@ function ProfileDisplay() {
         );
     }
     function Greeting() {
-        
-        if(selectedProfile.days)
-   {
-    return <UserGreeting />;
-   }
- 
-     
-      }
+
+        if (selectedProfile.days) {
+            return <UserGreeting />;
+        }
+
+
+    }
 
     return (
         <div>
