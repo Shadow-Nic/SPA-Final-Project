@@ -1,0 +1,32 @@
+
+.addDay{
+    margin-top: 10vh;
+    height: 80vh;
+    border: 1px solid red;
+}
+
+.addDay div form{
+    display: flex;
+    justify-content: space-around;
+}
+.addDay div form input{
+    width: 80%;
+    height: 40px;
+}
+.addDay div form button{
+    width: 20%;
+}
+.resultItem{
+    text-align: center;
+    font-size: 25px;
+    padding: 1px;
+    background-color: yellow;
+}
+.display{
+display: flex;
+justify-content: space-between;
+}
+.display .con2{
+    
+    margin-top: 50px;
+}

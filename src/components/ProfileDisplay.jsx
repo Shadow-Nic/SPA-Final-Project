@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import BmrChart from './chart';
+import DoughnutChart from './chart';
 
 function ProfileDisplay() {
     const { selectedProfile } = useContext(BmiContext);
@@ -20,7 +20,7 @@ function ProfileDisplay() {
 
         return (
             <div>
-                <BmrChart
+                <DoughnutChart
                     labels={['Left', 'TODAY Calories']}
                     data={[
                         (selectedProfile.bmr - selectedProfile.days[dayIndex].todayCalories),
@@ -29,7 +29,7 @@ function ProfileDisplay() {
                     backgroundColor={['green', 'blue']}
                     borderColor={['black', 'black']}
                 />
-                <BmrChart
+                <DoughnutChart
                     labels={['Fats', 'Protein', 'Carbs']}
                     data={[
                         selectedProfile.days[dayIndex].todayFats,
