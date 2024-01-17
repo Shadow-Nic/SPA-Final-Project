@@ -5,6 +5,7 @@ import DayPlan from './components/addDay';
 
 import ProfileDisplay from './components/ProfileDisplay';
 import Navbar from './components/Navbar';
+import Header from './components/Header';
 
 
 
@@ -16,6 +17,7 @@ function App() {
         <>
             <Router>
                 <BmiProvider>
+                    <Header></Header>
                     <Navbar />
                     <Routes>
                         <Route path="/" element={<ProfileDisplay />} />

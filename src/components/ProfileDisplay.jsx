@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
 import DoughnutChart from './chart';
 
+
 function ProfileDisplay() {
     const { selectedProfile } = useContext(BmiContext);
 
@@ -55,8 +56,9 @@ function ProfileDisplay() {
     return (
         <div>
             {selectedProfile && (
-                <div>
+                <div className="Profile">
                     <h2>{selectedProfile.name}'s Profile</h2>
+
                     <p>Age: {selectedProfile.age}</p>
                     <p>Height: {selectedProfile.height}</p>
                     <p>
