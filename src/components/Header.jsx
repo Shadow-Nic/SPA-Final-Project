@@ -25,12 +25,10 @@ const Header = () => {
     return (
      <header>
        <div className="header">
-
+      <div className='picker'>
        <SelectPicker value={JSON.stringify(selectedProfile)} data={data}  onChange={handleProfileSelect}/>
-
-        <div className='profilpic'>
-        <img src="/src/assets/Default_Profile_Picture.svg.png" alt="Profilepic" />
-        </div>
+       </div>
+        
          <img src="/src/assets/Logo-NoBG.png" alt="Fitify Logo" />
          <div className="menue">
            <Dropdown title={<FontAwesomeIcon icon={faBars} size="3x" />} noCaret>

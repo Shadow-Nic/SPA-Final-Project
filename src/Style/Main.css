@@ -31,9 +31,10 @@ header {
     
 }
 
-.profilpic img {
+.picker{
     position:absolute;
-    width: 50px;
-    left: -10%;
+    width: 100px;
+    left: 3%;
     top: 2%;
+    
 }
