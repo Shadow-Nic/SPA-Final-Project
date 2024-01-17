@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BmiContext } from '../context/BmiContext';
-import './addDay.css'
+import '../Style/addDay.css'
 import DoughnutChart from './chart';
 
 
