@@ -1,5 +1,4 @@
 import { Calendar, Badge } from 'rsuite';
-import { FaSmile, FaFrown} from 'react-icons/fa';
 
 function getTodoList(date) {
   const day = date.getDate();
