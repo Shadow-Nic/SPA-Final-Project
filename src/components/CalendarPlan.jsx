@@ -28,10 +28,10 @@ const CalendarPlan = () => {
     const list = getTodoList(date);
 
     if (list.length) {
-      return <FaSmile size={19} color='#47d661' />;
-    } else {
-      return <FaFrown size={19} color='#df1111' />;
+      return <Badge className="calendar-todo-item-badge" />;
     }
+
+    return null;
   }
   return (
     <div className='calendar'>
