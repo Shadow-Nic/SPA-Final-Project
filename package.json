@@ -24,7 +24,8 @@
     "react-fontawesome": "^1.7.1",
     "react-router-dom": "^6.21.2",
     "rsuite": "^5.50.0",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
