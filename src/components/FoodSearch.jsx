@@ -4,6 +4,9 @@ import { useDebounce } from 'use-debounce';
 import { Tooltip, Whisper, TagGroup, Tag, Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
+import {formatNumber, capitalizeAllWords, convertString} from './textFunc'
+
+
 import { DebounceInput } from 'react-debounce-input';
 
 ///icons
@@ -12,6 +15,7 @@ import SpinnerIcon from '@rsuite/icons/legacy/Spinner';
 import EditIcon from '@rsuite/icons/Edit';
 import TrashIcon from '@rsuite/icons/Trash';
 import SearchIcon from '@rsuite/icons/Search';
+import MinusIcon from '@rsuite/icons/Minus';
 
 import '../Style/FoodSearch.css';
 
@@ -51,24 +55,6 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
         if (!res.ok) throw new Error(res.status);
         return res.json();
     };
-
-    function formatNumber(num) {
-        let numStr = parseFloat(num).toFixed(2);
-        numStr = numStr.replace(/\.00$/, '');
-        return numStr;
-    }
-
-    function capitalizeAllWords(str) {
-        return str.split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    }
-
-    function convertString(str) {
-        return str.split(/(?=[A-Z])/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-            .replace(/G|M/, ' $&').replace(/G|Mg/g, match => ` (${match.toLowerCase()})`);
-    }
-
 
     const FoodList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/nutrition?query=${debouncedSearchTerm}` : null, fetcher);
@@ -172,7 +158,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                     onChange={(event) => setSearchTerm(event.target.value)}
                 />
                 <InputGroup.Addon>
-                    <IconButton icon={<CloseIcon />} onClick={() => setSearchTerm('')} />
+                    <IconButton icon={<MinusIcon />} onClick={() => setSearchTerm('')} />
                 </InputGroup.Addon>
             </InputGroup>
             <FoodList />
