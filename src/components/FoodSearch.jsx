@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import useSWR from 'swr';
 import { useDebounce } from 'use-debounce';
-import { Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
+import { Tooltip, Whisper, TagGroup, Tag, Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
 import { DebounceInput } from 'react-debounce-input';
@@ -11,6 +11,7 @@ import CloseIcon from '@rsuite/icons/Close';
 import SpinnerIcon from '@rsuite/icons/legacy/Spinner';
 import EditIcon from '@rsuite/icons/Edit';
 import TrashIcon from '@rsuite/icons/Trash';
+import SearchIcon from '@rsuite/icons/Search';
 
 import '../Style/FoodSearch.css';
 
@@ -19,10 +20,11 @@ import '../Style/FoodSearch.css';
 //icon end
 
 const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) => {
-   ;
+
     const [debouncedSearchTerm] = useDebounce(searchTerm, 2000);
-   
-  
+
+    const [detailMode, setDetailMode] = React.useState(false);
+
 
     const [selectedFood, setSelectedFood] = React.useState(null);
     const [tempServingSizeG, setTempServingSizeG] = React.useState('');
@@ -36,6 +38,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
     const handleClose = () => {
         setOpen(false);
         setSelectedFood(null);
+        setDetailMode(false);
         setTempServingSizeG('');
     };
 
@@ -61,6 +64,12 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
             .join(' ');
     }
 
+    function convertString(str) {
+        return str.split(/(?=[A-Z])/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+            .replace(/G|M/, ' $&').replace(/G|Mg/g, match => ` (${match.toLowerCase()})`);
+    }
+
+
     const FoodList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/nutrition?query=${debouncedSearchTerm}` : null, fetcher);
         if (error) {
@@ -76,6 +85,14 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                 calories: item.calories,
                 servingSizeG: item.serving_size_g,
                 fatTotalG: item.fat_total_g,
+                fatSaturatedG: item.fat_saturated_g,
+                proteinG: item.protein_g,
+                sodiumMg: item.sodium_mg,
+                potassiumMg: item.potassium_mg,
+                cholesterolMg: item.cholesterol_mg,
+                carbohydratesTotalG: item.carbohydrates_total_g,
+                fiberG: item.fiber_g,
+                sugarG: item.sugar_g
                 // Add other properties as needed
             }));
 
@@ -120,18 +137,25 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
 
     const AddedFoodsList = () => {
         return addedFoods.map((item, index) => (
-            <div key={index}>
+
+            <Tag size="lg" key={index} >
                 <p>{capitalizeAllWords(item.name)} - {formatNumber(item.servingSizeG)}g </p>
 
-                <IconButton icon={<EditIcon />} onClick={() => {
+                <IconButton size='sm' icon={<EditIcon />} onClick={() => {
                     setSelectedFood(item);
                     handleOpen();
                 }} />
-                <IconButton icon={<TrashIcon />} onClick={() => {
+                <IconButton size='sm' icon={<TrashIcon />} onClick={() => {
                     const updatedFoods = addedFoods.filter((_, i) => i !== index);
                     setAddedFoods(updatedFoods);
                 }} />
-            </div>
+                <IconButton size='sm' icon={<SearchIcon />} onClick={() => {
+                    setSelectedFood(item);
+                    setDetailMode(true);
+                    setOpen(true);
+                }} />
+
+            </Tag>
         ));
     };
 
@@ -140,11 +164,11 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
             <InputGroup>
                 <DebounceInput
                     className="searchInput"
-                     type="text"
-                     placeholder="Search for food..."
-                     minLength={1}
-                     debounceTimeout={2000}
-                     value={searchTerm}
+                    type="text"
+                    placeholder="Search for food..."
+                    minLength={1}
+                    debounceTimeout={2000}
+                    value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
                 />
                 <InputGroup.Addon>
@@ -153,31 +177,86 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
             </InputGroup>
             <FoodList />
             {addedFoods.length > 0 && <h3>Added Foods:</h3>}
-            <AddedFoodsList />
+            <TagGroup>
+                <AddedFoodsList />
+            </TagGroup>
 
 
-            <Modal open={open} onClose={handleClose}>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                className={detailMode ? 'modalDetail' : 'modalPop'}
+            >
                 <Modal.Header>
-                    <Modal.Title>Change Serving size</Modal.Title>
+                    <Modal.Title>{detailMode ? `${capitalizeAllWords(selectedFood.name)}'s nutrient table` : 'Change Serving size (g)'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <input
-                        type="number"
-                        value={tempServingSizeG}
-                        onChange={(e) => setTempServingSizeG(e.target.value)}
-                    />
+                    {detailMode ? (
+                        <>
+                            <List>
+                                {Object.entries(selectedFood).map(([key, value], index) => {
+                                    if (index > 0) {
+                                        return (
+                                            <List.Item key={index}>
+                                                {`${convertString(key)}: ${formatNumber(value)}`}
+                                            </List.Item>
+                                        );
+                                    }
+                                })}
+                            </List>
 
+
+
+                        </>
+                    ) : (
+                        <input
+                            type="number"
+                            value={tempServingSizeG}
+                            onChange={(e) => setTempServingSizeG(e.target.value)}
+                        />
+                    )}
                 </Modal.Body>
-
                 <Modal.Footer>
                     <Button onClick={() => {
-                        const newServingSizeG = parseFloat(tempServingSizeG);
-                        const newCalories = (selectedFood.calories / selectedFood.servingSizeG) * newServingSizeG;
-                        const newFatTotalG = (selectedFood.fatTotalG / selectedFood.servingSizeG) * newServingSizeG;
-                        // Calculate other stats based on the new serving size
-                        const updatedItem = { ...selectedFood, servingSizeG: newServingSizeG, calories: newCalories, fatTotalG: newFatTotalG };
-                        const updatedFoods = addedFoods.map(food => food.name === selectedFood.name ? updatedItem : food);
-                        setAddedFoods(updatedFoods);
+                        // Only perform the following actions if in edit mode
+                        if (!detailMode) {
+                            const newServingSizeG = parseFloat(tempServingSizeG);
+
+                            // Calculate proportions
+                            const proportion = newServingSizeG / selectedFood.servingSizeG;
+
+                            // Calculate new nutrient values
+                            const newCalories = selectedFood.calories * proportion;
+                            const newFatTotalG = selectedFood.fatTotalG * proportion;
+                            const newFatSaturatedG = selectedFood.fatSaturatedG * proportion;
+                            const newProteinG = selectedFood.proteinG * proportion;
+                            const newSodiumMg = selectedFood.sodiumMg * proportion;
+                            const newPotassiumMg = selectedFood.potassiumMg * proportion;
+                            const newCholesterolMg = selectedFood.cholesterolMg * proportion;
+                            const newCarbohydratesTotalG = selectedFood.carbohydratesTotalG * proportion;
+                            const newFiberG = selectedFood.fiberG * proportion;
+                            const newSugarG = selectedFood.sugarG * proportion;
+
+                            // Update the food item
+                            const updatedItem = {
+                                ...selectedFood,
+                                servingSizeG: newServingSizeG,
+                                calories: newCalories,
+                                fatTotalG: newFatTotalG,
+                                fatSaturatedG: newFatSaturatedG,
+                                proteinG: newProteinG,
+                                sodiumMg: newSodiumMg,
+                                potassiumMg: newPotassiumMg,
+                                cholesterolMg: newCholesterolMg,
+                                carbohydratesTotalG: newCarbohydratesTotalG,
+                                fiberG: newFiberG,
+                                sugarG: newSugarG
+                            };
+
+                            const updatedFoods = addedFoods.map(food => food.name === selectedFood.name ? updatedItem : food);
+                            setAddedFoods(updatedFoods);
+                        }
+                        // Always close the modal
                         handleClose();
                     }}>
                         Ok
@@ -187,6 +266,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     );
 }

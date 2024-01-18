@@ -1,3 +1,9 @@
 .searchInput{
 width: 100%;
 }
+.modalPop{
+    top:33vh;
+}
+.modalDetail{
+    top:10vh;
+}
