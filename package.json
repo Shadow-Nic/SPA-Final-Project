@@ -1,6 +1,7 @@
 {
   "name": "fitify",
   "private": true,
+  "proxy": "http://localhost:5000/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -22,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-fontawesome": "^1.7.1",
     "react-router-dom": "^6.21.2",
-    "rsuite": "^5.50.0"
+    "rsuite": "^5.50.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
