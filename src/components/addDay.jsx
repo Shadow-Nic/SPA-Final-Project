@@ -24,6 +24,9 @@ function addDay() {
     const [searchTermTab, setSearchTermTab] = useState('');
     const [addedSports, setAddedSports] = useState([]);
 
+
+    const [pickDate, setPickDate] = useState(new Date());
+
     // Tab controle
     const [active, setActive] = useState('food');
 
@@ -34,11 +37,11 @@ function addDay() {
                     <Nav.Item eventKey="food" >Meal's 🍕 </Nav.Item>
                     <Nav.Item eventKey="sport">Activity's 🤸🏽‍♀️ </Nav.Item>
                     <Nav.Item eventKey="sum">Summary 📋</Nav.Item>
-                    <DatePicker className='chooseDay' format="dd.MM.yy"  defaultValue={new Date()} placement="leftStart" placeholder="📅" style={{ width: 115 }} />
+                    <DatePicker value={pickDate} className='chooseDay' format="dd.MM.yy"  defaultValue={new Date()} placement="leftStart" placeholder="📅" style={{ width: 115 }}  onChange={date => setPickDate(date)} />
                 </Nav>
                 {active == 'food' && <FoodSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} addedFoods={addedFoods} setAddedFoods={setAddedFoods} />}
                 {active == 'sport' && <SportSearch searchTerm={searchTermTab} setSearchTerm={setSearchTermTab} lbs={selectedProfile.weightLbs} addedSports={addedSports} setAddedSports={setAddedSports} />}
-                {active == 'sum' && <DaySummary addedFoods={addedFoods} addedSports={addedSports} />}            
+                {active == 'sum' && <DaySummary addedFoods={addedFoods} addedSports={addedSports} pickDate={pickDate} />}            
             </div>
         );
     };

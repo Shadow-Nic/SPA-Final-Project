@@ -1,10 +1,31 @@
 import React, { useState, useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
 import {TagGroup, Tag, Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
-import {formatNumber, capitalizeAllWords, convertString} from './textFunc'
+import {formatNumber, capitalizeAllWords, convertString, cutDate} from './textFunc'
 
 
-const SportSearch = ({ addedFoods, addedSports }) => {
+const SportSearch = ({ addedFoods, addedSports, pickDate }) => {
+
+    // context stuff
+
+    const { dispatch, state, selectedProfile } = useContext(BmiContext);
+
+
+    const updateDay = () => {
+        dispatch({
+            type: 'ADD_DAY',
+            payload: {
+                profileId: selectedProfile.id,
+                dayData: {
+                    date: cutDate(pickDate),
+                    sports: addedSports,
+                    foods: addedFoods
+                }
+            }
+        });
+    };
+
+    //context stuff end
 
     const AddedSportsList = () => {
         return addedSports.map((item, index) => (
@@ -26,7 +47,8 @@ const SportSearch = ({ addedFoods, addedSports }) => {
 
 
     return (
-        <div><p>this is a summary of your day</p>
+        <div>
+            <h4>This is your summary {capitalizeAllWords(selectedProfile.name)}!</h4>
 
             {addedSports.length > 0 && <h3>Added Sports:</h3>}
             <TagGroup>
@@ -38,7 +60,10 @@ const SportSearch = ({ addedFoods, addedSports }) => {
             </TagGroup>
 
 
+            <button onClick={updateDay}>update my Day!</button>
         </div>
+
+        
     );
 
 }
