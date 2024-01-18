@@ -38,3 +38,9 @@ header {
     top: 2%;
     
 }
+
+/* Kalender */
+
+.calendar {
+    width: 100vw;
+}

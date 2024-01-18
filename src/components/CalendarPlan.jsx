@@ -34,7 +34,7 @@ const CalendarPlan = () => {
     return null;
   }
   return (
-    <div style={{ width: 280 }}>
+    <div className='calendar'>
       <Calendar compact bordered renderCell={renderCell} />{' '}
     </div>
   );
