@@ -1,4 +1,5 @@
 import { Calendar, Badge } from 'rsuite';
+import { FaSmile, FaFrown} from 'react-icons/fa';
 
 function getTodoList(date) {
   const day = date.getDate();
@@ -28,10 +29,10 @@ const CalendarPlan = () => {
     const list = getTodoList(date);
 
     if (list.length) {
-      return <Badge className="calendar-todo-item-badge" />;
+      return <FaSmile size={19} color='#47d661' />;
+    } else {
+      return <FaFrown size={19} color='#df1111' />;
     }
-
-    return null;
   }
   return (
     <div className='calendar'>
