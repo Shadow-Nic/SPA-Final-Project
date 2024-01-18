@@ -20,7 +20,7 @@ import '../Style/FoodSearch.css';
 
 const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) => {
    ;
-    const [debouncedSearchTerm] = useDebounce(searchTerm, 1000);
+    const [debouncedSearchTerm] = useDebounce(searchTerm, 2000);
    
   
 
@@ -143,7 +143,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                      type="text"
                      placeholder="Search for food..."
                      minLength={1}
-                     debounceTimeout={1000}
+                     debounceTimeout={2000}
                      value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
                 />
