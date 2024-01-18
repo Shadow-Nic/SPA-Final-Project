@@ -1,4 +1,5 @@
 import { Calendar, Badge } from 'rsuite';
+import '../Style/Main.css';
 
 function getTodoList(date) {
   const day = date.getDate();
