@@ -12,6 +12,9 @@ import SpinnerIcon from '@rsuite/icons/legacy/Spinner';
 import EditIcon from '@rsuite/icons/Edit';
 import TrashIcon from '@rsuite/icons/Trash';
 
+import '../Style/FoodSearch.css';
+
+
 
 //icon end
 
@@ -136,6 +139,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
         <div>
             <InputGroup>
                 <DebounceInput
+                    className="searchInput"
                      type="text"
                      placeholder="Search for food..."
                      minLength={1}
