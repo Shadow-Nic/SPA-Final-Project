@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BmiContext } from '../context/BmiContext';
+import { Form, Input, Button } from 'rsuite';
+
 
 function BmiCalculator() {
     const { dispatch } = useContext(BmiContext);
@@ -14,11 +16,11 @@ function BmiCalculator() {
     const [gender, setGender] = useState('');
   
     const handleHeightChange = (event) => {
-        setHeight(event.target.value);
+        setHeight(event);
     };
 
     const handleWeightChange = (event) => {
-        let weightVal = event.target.value;
+        let weightVal = event;
         if (unit === 'lbs') {
             setWeightLbs(weightVal);
             weightVal = weightVal * 0.453592; // Convert pounds to kilograms
@@ -29,19 +31,19 @@ function BmiCalculator() {
     };
 
     const handleUnitChange = (event) => {
-        setUnit(event.target.value);
+        setUnit(event);
     };
 
     const handleNameChange = (event) => {
-        setName(event.target.value);
+        setName(event);
     };
 
     const handleAgeChange = (event) => {
-        setAge(event.target.value);
+        setAge(event);
     };
 
     const handleGenderChange = (event) => {
-        setGender(event.target.value);
+        setGender(event);
     };
 
     const calculateBmr = () => {
@@ -89,40 +91,40 @@ function BmiCalculator() {
     };
 
     return (
-        <div>
-            <label>
-                Name:
-                <input type="text" value={name} onChange={handleNameChange} />
-            </label>
-            <label>
-                Age:
-                <input type="number" value={age} onChange={handleAgeChange} />
-            </label>
-            <label>
-                Height (cm):
-                <input type="number" value={height} onChange={handleHeightChange} />
-            </label>
-            <label>
-                Weight ({unit}):
-                <input type="number" value={unit === 'kg' ? weightKg : weightLbs} onChange={handleWeightChange} />
-            </label>
-            <label>
-                Unit:
-                <select value={unit} onChange={handleUnitChange}>
-                    <option value="kg">Kilograms</option>
-                    <option value="lbs">Pounds</option>
-                </select>
-            </label>
-            <label>
-                Gender:
-                <select value={unit} onChange={handleGenderChange}>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </label>
-            <button onClick={calculateBmi}>Calculate BMI</button>
-        </div>
-    );
+        <Form>
+           <div>
+               <Form.ControlLabel>Name:</Form.ControlLabel>
+               <Input type="text" value={name} onChange={handleNameChange} />
+           </div>
+           <div>
+               <Form.ControlLabel>Age:</Form.ControlLabel>
+               <Input type="number" value={age} onChange={handleAgeChange} />
+           </div>
+           <div>
+               <Form.ControlLabel>Height (cm):</Form.ControlLabel>
+               <Input type="number" value={height} onChange={handleHeightChange} />
+           </div>
+           <div>
+               <Form.ControlLabel>Weight ({unit}):</Form.ControlLabel>
+               <Input type="number" value={unit === 'kg' ? weightKg : weightLbs} onChange={handleWeightChange} />
+           </div>
+           <div>
+               <Form.ControlLabel>Unit:</Form.ControlLabel>
+               <Input as="select" value={unit} onChange={handleUnitChange}>
+                  <option value="kg">Kilograms</option>
+                  <option value="lbs">Pounds</option>
+               </Input>
+           </div>
+           <div>
+               <Form.ControlLabel>Gender:</Form.ControlLabel>
+               <Input as="select" value={gender} onChange={handleGenderChange}>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+               </Input>
+           </div>
+           <Button onClick={calculateBmi}>Calculate BMI</Button>
+       </Form>
+   );
 }
 
 export default BmiCalculator;
