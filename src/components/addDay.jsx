@@ -1,19 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import { Nav } from 'rsuite';
-import '../Style/addDay.css'
+// rsuite components
+import { Nav,  DatePicker } from 'rsuite';
+import { useToast } from './useToast';
 
 //Tabbar components
-
 import FoodSearch from './FoodSearch';
 import SportSearch from './SportSearch';
 import DaySummary from './DaySummary';
 
-import { DatePicker } from 'rsuite';
+//shared extras
 import { cutDate } from './textFunc'
-import { useToast } from './useToast';
 
-//Tabbar end
+//css
+import '../Style/addDay.css'
 
 function addDay() {
     // context
