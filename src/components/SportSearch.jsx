@@ -1,40 +1,29 @@
-import React, { useState, useContext, useEffect } from 'react';
-import useSWR from 'swr';
-import { useDebounce } from 'use-debounce';
-import { Tooltip, Whisper, TagGroup, Tag, Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
-const { Column, HeaderCell, Cell } = Table;
+import React from 'react';
 
-import {formatNumber, capitalizeAllWords, convertString} from './textFunc'
+//rsuite components
+import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader } from 'rsuite';
+const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
+//shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons
+import { formatNumber, capitalizeAllWords, convertString } from './textFunc'
+import { useSWR, fetcher, DebounceInput, useDebounce } from './apiFunc'
+import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
+//css
+import '../Style/FoodSearch.css'
 
-import { DebounceInput } from 'react-debounce-input';
-
-///icons
-import CloseIcon from '@rsuite/icons/Close';
-import SpinnerIcon from '@rsuite/icons/legacy/Spinner';
-import EditIcon from '@rsuite/icons/Edit';
-import TrashIcon from '@rsuite/icons/Trash';
-import SearchIcon from '@rsuite/icons/Search';
-import MinusIcon from '@rsuite/icons/Minus';
-import '../Style/FoodSearch.css';
-
-//icon end
-
+// component start
 const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSports }) => {
 
+    // debounce (delayed input)
     const [debouncedSearchTerm] = useDebounce(searchTerm, 2000);
 
-    const [detailMode, setDetailMode] = React.useState(false);
-
-
+    // act vars
     const [selectedSport, setSelectedSport] = React.useState(null);
     const [tempDuration, setTempDuration] = React.useState('');
 
-    const apiKey = 'hWdaj14WL8WDgVYei8imulkY2hKH8uxTfiDUvVHP';
-
+    // modal var
     const [open, setOpen] = React.useState(false);
-
-
+    const [detailMode, setDetailMode] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false);
@@ -43,33 +32,27 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
         setTempDuration('');
     };
 
-    const fetcher = async (url) => {
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: { 'X-Api-Key': apiKey },
-            contentType: 'application/json',
-        });
-        if (!res.ok) throw new Error(res.status);
-        return res.json();
-    };
-
+    // fetching for the initial sports list
     const SportList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/caloriesburned?activity=${debouncedSearchTerm}&weight=${lbs}&duration=10` : null, fetcher);
         if (error) {
             console.log(error)
             return <div>Failed to load</div>
         };
-        if (isLoading) return <div>   <Placeholder.Paragraph rows={8} />
-            <Loader center content="loading" /></div>;
-
+        if (isLoading)
+            return (
+                <div>
+                    <Placeholder.Paragraph rows={15} />
+                    <Loader center content="loading" />
+                </div>
+            );
         if (Array.isArray(data)) {
             const sport = data.map((item) => ({
                 name: item.name,
                 caloriesPerHour: item.calories_per_hour,
-                durationMinutes: item.duration_minutes ,
+                durationMinutes: item.duration_minutes,
                 totalCalories: item.total_calories
             }));
-
             return (
                 <Table
                     height={400}
@@ -90,17 +73,13 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                             {rowData => capitalizeAllWords(rowData.name)}
                         </Cell>
                     </Column>
-             
                 </Table>
-
-
             );
         }
     };
 
     const AddedSportsList = () => {
         return addedSports.map((item, index) => (
-
             <Tag size="lg" key={index} >
                 <p>{capitalizeAllWords(item.name)} - {formatNumber(item.durationMinutes)}m </p>
 
@@ -117,11 +96,10 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                     setDetailMode(true);
                     setOpen(true);
                 }} />
-
             </Tag>
         ));
     };
-/// Main Search input
+    /// Main Search input
     return (
         <div>
             <InputGroup>
@@ -184,14 +162,14 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
 
                             // Calculate proportions
                             const proportion = newDuration / selectedSport.durationMinutes;
-                          
+
                             const newDurationMinutes = selectedSport.durationMinutes * proportion;
                             const newTotalCalories = selectedSport.totalCalories * proportion;
                             // Update the sport item
                             const updatedItem = {
                                 ...selectedSport,
                                 durationMinutes: newDurationMinutes,
-                                totalCalories:  newTotalCalories,
+                                totalCalories: newTotalCalories,
                             };
                             const updatedSports = addedSports.map(sport => sport.name === selectedSport.name ? updatedItem : sport);
                             setAddedSports(updatedSports);

@@ -1,43 +1,29 @@
-import React, { useState, useContext, useEffect } from 'react';
-import useSWR from 'swr';
-import { useDebounce } from 'use-debounce';
-import { Tooltip, Whisper, TagGroup, Tag, Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
-const { Column, HeaderCell, Cell } = Table;
+import React from 'react';
 
-import {formatNumber, capitalizeAllWords, convertString} from './textFunc'
+//rsuite components
+import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader } from 'rsuite';
+const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
+//shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons
+import { formatNumber, capitalizeAllWords, convertString } from './textFunc'
+import { useSWR, fetcher, DebounceInput, useDebounce } from './apiFunc'
+import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
+//css
+import '../Style/FoodSearch.css'
 
-import { DebounceInput } from 'react-debounce-input';
-
-///icons
-import CloseIcon from '@rsuite/icons/Close';
-import SpinnerIcon from '@rsuite/icons/legacy/Spinner';
-import EditIcon from '@rsuite/icons/Edit';
-import TrashIcon from '@rsuite/icons/Trash';
-import SearchIcon from '@rsuite/icons/Search';
-import MinusIcon from '@rsuite/icons/Minus';
-
-import '../Style/FoodSearch.css';
-
-
-
-//icon end
-
+// component Start
 const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) => {
 
+    // debounce (delayed input)
     const [debouncedSearchTerm] = useDebounce(searchTerm, 2000);
 
-    const [detailMode, setDetailMode] = React.useState(false);
-
-
+    // food vars
     const [selectedFood, setSelectedFood] = React.useState(null);
     const [tempServingSizeG, setTempServingSizeG] = React.useState('');
 
-    const apiKey = 'hWdaj14WL8WDgVYei8imulkY2hKH8uxTfiDUvVHP';
-
+    // Modal  vars
     const [open, setOpen] = React.useState(false);
-
-
+    const [detailMode, setDetailMode] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false);
@@ -45,26 +31,21 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
         setDetailMode(false);
         setTempServingSizeG('');
     };
-
-    const fetcher = async (url) => {
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: { 'X-Api-Key': apiKey },
-            contentType: 'application/json',
-        });
-        if (!res.ok) throw new Error(res.status);
-        return res.json();
-    };
-
+    
+    // fetching for the initial food list
     const FoodList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/nutrition?query=${debouncedSearchTerm}` : null, fetcher);
         if (error) {
             console.log(error)
             return <div>Failed to load</div>
         };
-        if (isLoading) return <div>   <Placeholder.Paragraph rows={8} />
-            <Loader center content="loading" /></div>;
-
+        if (isLoading)
+            return (
+                <div>
+                    <Placeholder.Paragraph rows={15} />
+                    <Loader center content="loading" />
+                </div>
+            );
         if (Array.isArray(data)) {
             const food = data.map((item) => ({
                 name: item.name,
@@ -79,7 +60,6 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                 carbohydratesTotalG: item.carbohydrates_total_g,
                 fiberG: item.fiber_g,
                 sugarG: item.sugar_g
-                // Add other properties as needed
             }));
 
             return (
@@ -190,9 +170,6 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                                     }
                                 })}
                             </List>
-
-
-
                         </>
                     ) : (
                         <input
