@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 //rsuite components
 import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader } from 'rsuite';
@@ -8,6 +8,7 @@ const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 import { formatNumber, capitalizeAllWords, convertString } from './textFunc'
 import { useSWR, fetcher, DebounceInput, useDebounce } from './apiFunc'
 import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
+
 //css
 import '../Style/FoodSearch.css'
 
@@ -32,6 +33,7 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
         setTempDuration('');
     };
 
+  
     // fetching for the initial sports list
     const SportList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/caloriesburned?activity=${debouncedSearchTerm}&weight=${lbs}&duration=10` : null, fetcher);

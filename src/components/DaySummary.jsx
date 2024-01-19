@@ -1,32 +1,36 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import {TagGroup, Tag, Nav, Table, FlexboxGrid, Modal, Button, List, ButtonToolbar, Placeholder, Input, InputGroup, IconButton, Loader } from 'rsuite';
-import {formatNumber, capitalizeAllWords, convertString, cutDate} from './textFunc'
+
+import { TagGroup, Tag, Button } from 'rsuite';
+import { formatNumber, capitalizeAllWords, cutDate } from './textFunc'
+
+import { useToast } from './useToast';
+
 
 
 const SportSearch = ({ addedFoods, addedSports, pickDate }) => {
 
-    // context stuff
-
-    const { dispatch, state, selectedProfile } = useContext(BmiContext);
-
-
+    //toast
+    const showToast = useToast();
+    //context and dispatch
+    const { dispatch, selectedProfile } = useContext(BmiContext);
+    let fDate = cutDate(pickDate);
     const updateDay = () => {
         dispatch({
             type: 'ADD_DAY',
             payload: {
                 profileId: selectedProfile.id,
                 dayData: {
-                    date: cutDate(pickDate),
+                    date: fDate,
                     sports: addedSports,
                     foods: addedFoods
                 }
             }
         });
+        showToast('success', `Updated: ${fDate}`);
     };
 
-    //context stuff end
-
+    // sport summary
     const AddedSportsList = () => {
         return addedSports.map((item, index) => (
 
@@ -36,6 +40,7 @@ const SportSearch = ({ addedFoods, addedSports, pickDate }) => {
         ));
     };
 
+    // food summary
     const AddedFoodsList = () => {
         return addedFoods.map((item, index) => (
 
@@ -59,11 +64,12 @@ const SportSearch = ({ addedFoods, addedSports, pickDate }) => {
                 <AddedFoodsList />
             </TagGroup>
 
+            <p>note you will not </p>
+            <Button onClick={updateDay}>update my Day!</Button>
 
-            <button onClick={updateDay}>update my Day!</button>
         </div>
 
-        
+
     );
 
 }
