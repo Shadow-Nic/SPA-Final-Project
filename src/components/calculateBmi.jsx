@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { BmiContext } from '../context/BmiContext';
 import { Form, Input, Button } from 'rsuite';
 
-
 function BmiCalculator() {
     const { dispatch } = useContext(BmiContext);
     const navigate = useNavigate();
@@ -20,10 +19,6 @@ function BmiCalculator() {
         return savedProfiles ? savedProfiles.length : 0;
     });
     
-    
-
-
-
     const handleHeightChange = (event) => {
         setHeight(event);
     };
