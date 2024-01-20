@@ -20,7 +20,7 @@ const WeekChart = () => {
                 label: 'Required',
                 data: last7DaysData.map(item => item.goalCalories),
                 backgroundColor: 'red',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'red',
                 borderWidth: 1,
             },
             {
@@ -35,8 +35,8 @@ const WeekChart = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-            <p style={{ marginBottom: '0' }}>Weekly</p>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }} >
+            <h3 style={{ marginBottom: '0' }}>Weekly</h3>
             <div style={{ width: '300px', height: '200px', display: 'flex' }}>
                 <Bar
                     data={chartData}

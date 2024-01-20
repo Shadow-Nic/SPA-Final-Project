@@ -66,23 +66,26 @@ const DayChart = () => {
 
     // Render the charts
     return (
-        <div className='wrapperChart'>
-            <div className='con1' >
-                <p>Calories</p>
-                <p>{achievedCalories.toFixed(2)}kcal /{goalCalories}kcal </p>
-                <div className='dailyChart'>
-                    <Doughnut data={chartDataCalories} options={options} style={{ width: '100%', height: '100%' }} />
+        <div style={{ height: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }} >
+            <h3 style={{ marginBottom: '0' }}>Daily</h3>
+            <div className='wrapperChart'>
+                <div className='con1' >
+                    <p>Calories</p>
+                    <p>{achievedCalories.toFixed(2)}kcal /{goalCalories}kcal </p>
+                    <div className='dailyChart'>
+                        <Doughnut data={chartDataCalories} options={options} style={{ width: '65%', height: '65%' }} />
+                    </div>
                 </div>
-            </div>
-            <div className='con2'>
-                <div className='dailyChart'>
-                    <Doughnut data={chartDataNutrition} options={options} style={{ width: '100%', height: '100%' }} />
+                <div className='con2'>
+                    <div className='dailyChart'>
+                        <Doughnut data={chartDataNutrition} options={options} style={{ width: '65%', height: '65%' }} />
+                    </div>
+                    <ul>
+                        <li>{intakeCalories.proteinG.toFixed(1)}g Proteins,</li>
+                        <li>{intakeCalories.fatTotalG.toFixed(1)}g Fats,</li>
+                        <li>{intakeCalories.carbohydratesTotalG.toFixed(1)}g Carbs</li>
+                    </ul>
                 </div>
-                <ul>
-                    <li>{intakeCalories.proteinG.toFixed(1)}g Proteins,</li>
-                    <li>{intakeCalories.fatTotalG.toFixed(1)}g Fats,</li>
-                    <li>{intakeCalories.carbohydratesTotalG.toFixed(1)}g Carbs</li>
-                </ul>
             </div>
         </div >
     );
