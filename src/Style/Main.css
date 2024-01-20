@@ -46,6 +46,11 @@ header {
     color: #E09836;
 }
 
+.header button:focus {
+    background-color: transparent;
+    color: #E09836;
+}
+
 .picker{
     position:absolute;
     width: 100px;
