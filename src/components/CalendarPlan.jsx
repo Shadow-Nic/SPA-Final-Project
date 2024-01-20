@@ -51,9 +51,10 @@ const CalendarPlan = () => {
 
     return null;
   }
+
   return (
     <div className='calendar'>
-      <Calendar compact bordered renderCell={renderCell} />{' '}
+      <Calendar compact bordered renderCell={renderCell} />
     </div>
   );
 };
