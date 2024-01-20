@@ -40,7 +40,7 @@ const CalendarPlan = () => {
     if (dayIndex !== -1) {
       const { goalReached } = calculateCalories(selectedProfile.days[dayIndex]?.foods, selectedProfile.days[dayIndex]?.sports);
       if (goalReached !== undefined) {
-        return <Badge style={{ background: 'transparent' }} content={goalReached ? '😊' : '😠'} />;
+        return <Badge style={{ background: 'transparent' }} content={goalReached ? '😠' : '😊'} />;
       }
     }
 
