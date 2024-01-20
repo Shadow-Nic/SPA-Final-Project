@@ -1,0 +1,37 @@
+.searchInput{
+    margin-top: 10px;
+width: 100%;
+font-size: 18px;
+border-radius: 0;
+padding: 15px;
+}
+div.searchGroup{
+    border-top: 0; 
+}
+.modalPop{
+    top:33vh;
+}
+.modalDetail{
+    top:10vh;
+}
+.modalDetailSport{
+    top:33vh;
+}
+.rs-tag-group{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.noResult{
+    width: 80%;
+    margin: 15px 10%;
+    padding-left: 15%;
+}
+h4{
+    padding-top: 25px;
+    text-align: center;
+}
+.bigButton{
+    margin-left: 22%;
+    margin-top: 15px;
+}

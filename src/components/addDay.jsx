@@ -1,145 +1,90 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import { Popover, Whisper } from 'rsuite';
+// rsuite components
+import { Nav, DatePicker } from 'rsuite';
+import { useToast } from './useToast';
+
+//Tabbar components
+import FoodSearch from './FoodSearch';
+import SportSearch from './SportSearch';
+import DaySummary from './DaySummary';
+
+//shared extras
+import { cutDate } from './textFunc'
+
+//css
 import '../Style/addDay.css'
 
-
-
 function addDay() {
-    const { dispatch, state, selectedProfile } = useContext(BmiContext);
-    const navigate = useNavigate();
+    // context
+    const { selectedProfile } = useContext(BmiContext);
 
-    const selectedProfileIndex = state.findIndex(profile => profile === selectedProfile);
+    //toast
+    const showToast = useToast();
+
+    // Foods
+    const [searchTerm, setSearchTerm] = useState('');
+    const [addedFoods, setAddedFoods] = useState([]);
+    // Sports
+    const [searchTermTab, setSearchTermTab] = useState('');
+    const [addedSports, setAddedSports] = useState([]);
+
+    // Date
+    const [pickDate, setPickDate] = useState(new Date());
 
 
-    const date = new Date();
-    const currentDate = date.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: '2-digit'
-    }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, "$1.$2.$3"); //12.12.12 > 12 december 2012
-
-    const addCalories = () => {
-        dispatch({
-            type: 'ADD_DAY',
-            payload: {
-                profileIndex: selectedProfileIndex,
-                dayData: {
-                    date: currentDate,
-                    todayCalories,
-                    todayProteins,
-                    todayFats,
-                    todayCarbs
+    //loading existing Day data
+    useEffect(() => {
+        if (selectedProfile) {
+            let fDate = cutDate(pickDate);
+            if (selectedProfile.days) {
+                const dayIndex = selectedProfile.days.findIndex(day => day.date === fDate);
+                if (dayIndex !== -1) {
+                    // Load the day's data here
+                    const dayData = selectedProfile.days[dayIndex];
+                    // Set the state with the loaded data
+                    setAddedFoods(dayData.foods);
+                    setAddedSports(dayData.sports);
+                    if (!(dayData.foods.length === 0 && dayData.sports.length === 0)) {
+                        
+                        showToast('info', `Loaded: ${fDate}`);
+                    }
+                    else{
+                        setActive('food');
+                    }
+                }
+                else {
+                    // empty out the data beauser day was epmty anyways
+                    setAddedFoods([]);
+                    setAddedSports([]);
+                    setActive('food');
                 }
             }
-        });
-        navigate('/');
-    };
-
-    // Fetch
-
-    const apiKey = 'hWdaj14WL8WDgVYei8imulkY2hKH8uxTfiDUvVHP';
-    const [query, setQuery] = useState('');
-    const [nutritionFacts, setNutritionFacts] = useState([]);
-    const [todayCalories, setTodayCalories] = useState(0);
-    const [todayFats, setTodayFats] = useState(0);
-    const [todayProteins, setTodayProteins] = useState(0);
-    const [todayCarbs, setTodayCarbs] = useState(0);
-    const [food, setfood] = useState([])
-
-
-    const handleSubmit = async (query) => {
-        // Api anfrage um die Nährstoffwerte zu bekommen
-        const url = `https://api.api-ninjas.com/v1/nutrition?query=${query}`;
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: { 'X-Api-Key': apiKey },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
         }
+    }, [selectedProfile, pickDate]); // Dependencies
 
-        const data = await response.json();
+    // Tab controle
+    const [active, setActive] = useState('food');
 
-        setNutritionFacts(data);
+    const Tabbar = ({ active, onSelect, ...props }) => {
+        return (
+            <div>
+                <Nav  justified {...props} activeKey={active} onSelect={onSelect}>
+                    <Nav.Item eventKey="food" >Meal's 🍕 </Nav.Item>
+                    <Nav.Item eventKey="sport">Activity's 🤸🏽‍♀️ </Nav.Item>
+                    <Nav.Item disabled={(addedFoods.length === 0 && addedSports.length === 0)} eventKey="sum">Summary 📋</Nav.Item>
+                    <DatePicker cleanable={false} value={pickDate} className='chooseDay' format="dd.MM.yy" defaultValue={pickDate} placement="leftStart" placeholder="📅" style={{ width: 115 }} onChange={date => setPickDate(date)} />
+                </Nav>
+                {active == 'food' && <FoodSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} addedFoods={addedFoods} setAddedFoods={setAddedFoods} />}
+                {active == 'sport' && <SportSearch searchTerm={searchTermTab} setSearchTerm={setSearchTermTab} lbs={selectedProfile.weightLbs} addedSports={addedSports} setAddedSports={setAddedSports} />}
+                {active == 'sum' && <DaySummary addedFoods={addedFoods} addedSports={addedSports} pickDate={pickDate} />}
+            </div>
+        );
     };
-
-
-    const handleWeight = (index, weight) => {
-        // berechnet die Nährstoffe der Menge die der User zu sich genommen hat
-        const food = nutritionFacts[index];
-        const weightInput = window.prompt(`Please enter the weight of ${food.name} in grams:`);
-        if (weightInput) {
-            const weight = parseFloat(weightInput);
-
-            const {
-                carbohydrates_total_g,
-                fat_total_g,
-                protein_g,
-                calories,
-                serving_size_g,
-                name
-            } = food;
-
-            addNutrients(
-                calories * (weight / serving_size_g),
-                fat_total_g * (weight / serving_size_g),
-                protein_g * (weight / serving_size_g),
-                carbohydrates_total_g * (weight / serving_size_g)
-            );
-
-            addFood(name, weight);
-        }
-    };
-
-    function addNutrients(calories, fats, proteins, carbs) {
-        setTodayCalories((prevCalories) => prevCalories + calories);
-        setTodayFats((prevFats) => prevFats + fats);
-        setTodayProteins((prevProteins) => prevProteins + proteins);
-        setTodayCarbs((prevCarbs) => prevCarbs + carbs);
-    }
-    function addFood(name, weight) {
-        setfood((prevFood) => [...prevFood, { name, weight }]);
-    }
-
-
     return (
         <div className='addDay'>
-            <div className='display'>
-                <div className='con1'>
-
-                </div>
-                <div className='con2'>
-                    <p>Today's Calories: {todayCalories}</p>
-                    <ul>
-                        {food.map((food, index) => (
-                            <li key={index}>
-                                {food.weight}g {food.name}
-                            </li>
-                        ))}
-                    </ul>
-                    <button onClick={addCalories}>add Calories to Profile</button>
-                </div>
-            </div>
-            <div>
-                <form onSubmit={(e) => { e.preventDefault(); handleSubmit(query); }}>
-                    <input type="text" onChange={(e) => setQuery(e.target.value)} />
-                    <button type="submit">Search</button>
-                </form>
-                <div>
-                    <p>Result:</p>
-                    {nutritionFacts.map((fact, index) => (
-                        <p key={index} onClick={() => handleWeight(index)} className='resultItem'>
-                            {fact.name}
-                        </p>
-                    ))}
-                </div>
-            </div>
+            <Tabbar appearance="tabs" active={active} onSelect={setActive} />
         </div>
-
     );
 }
 

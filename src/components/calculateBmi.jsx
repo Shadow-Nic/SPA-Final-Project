@@ -14,7 +14,16 @@ function BmiCalculator() {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
-  
+    let ids = Object.values(localStorage)
+        .filter(item => item.startsWith('{')) // filter out non-objects
+        .map(item => JSON.parse(item)) // parse the objects
+        .map(item => item.id) // get the id of each object
+        .filter(id => !isNaN(id)) // filter out non-numbers
+        .sort((a, b) => b - a); // sort in descending order
+
+    const [id, setId] = useState(ids[0] || 1); // set the initial id
+
+
     const handleHeightChange = (event) => {
         setHeight(event);
     };
@@ -71,9 +80,11 @@ function BmiCalculator() {
             } else {
                 categoryMsg = 'Obese';
             }
+     
             dispatch({
                 type: 'ADD_PROFILE',
                 payload: {
+                    id,
                     name,
                     height,
                     weightKg,
@@ -84,8 +95,10 @@ function BmiCalculator() {
                     bmr: bmrVal,
                     bmi: bmiVal,
                     category: categoryMsg,
+                    days: []
                 },
             });
+            setId(id + 1);
             navigate('/');
         }
     };

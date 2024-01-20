@@ -13,7 +13,6 @@ import '../Style/Main.css';
 const Header = () => {
 
   const { state, selectedProfile, setSelectedProfile } = useContext(BmiContext);
-
   const data = state.map(
     profile => ({ label: profile.name, value: JSON.stringify(profile) })
   );
@@ -26,7 +25,7 @@ const Header = () => {
      <header>
        <div className="header">
       <div className='picker'>
-       <SelectPicker value={JSON.stringify(selectedProfile)} data={data}  onChange={handleProfileSelect}/>
+       <SelectPicker cleanable={false} value={JSON.stringify(selectedProfile)} data={data}  onChange={handleProfileSelect}/>
        </div>
         
          <img src="/src/assets/Logo-NoBG.png" alt="Fitify Logo" />

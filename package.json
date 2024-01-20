@@ -1,6 +1,7 @@
 {
   "name": "fitify",
   "private": true,
+  "proxy": "http://localhost:5000/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -19,11 +20,14 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-chartjs-2": "^5.2.0",
+    "react-debounce-input": "^3.3.0",
     "react-dom": "^18.2.0",
     "react-fontawesome": "^1.7.1",
     "react-icons": "^5.0.1",
     "react-router-dom": "^6.21.2",
-    "rsuite": "^5.50.0"
+    "rsuite": "^5.50.0",
+    "swr": "^2.2.4",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
