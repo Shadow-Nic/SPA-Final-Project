@@ -75,7 +75,7 @@ justify-content: center;
 
  .wrapperChart{
     display: flex;
-    height: 200px;
+    height: 250px;
  }
  .dailyChart{
     height: 100%;

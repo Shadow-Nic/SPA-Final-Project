@@ -38,7 +38,7 @@ const MonthlyChart = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
             <p style={{ marginBottom: '0' }}>Monthly</p>
-            <div style={{ width: '300px', height: '150px', display: 'flex' }}>
+            <div style={{ width: '300px', height: '200px', display: 'flex' }}>
                 <Bar
                     data={chartData}
                     options={{
