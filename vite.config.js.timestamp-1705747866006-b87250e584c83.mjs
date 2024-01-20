@@ -1,0 +1,15 @@
+// vite.config.js
+import { defineConfig } from "file:///home/dci-student/Desktop/Web-Dev/Projects/SPA-Final-Project/node_modules/vite/dist/node/index.js";
+import react from "file:///home/dci-student/Desktop/Web-Dev/Projects/SPA-Final-Project/node_modules/@vitejs/plugin-react/dist/index.mjs";
+var vite_config_default = defineConfig({
+  server: {
+    proxy: {
+      "/api": "https://api.api-ninjas.com/v1"
+    }
+  },
+  plugins: [react()]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCIvaG9tZS9kY2ktc3R1ZGVudC9EZXNrdG9wL1dlYi1EZXYvUHJvamVjdHMvU1BBLUZpbmFsLVByb2plY3RcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfZmlsZW5hbWUgPSBcIi9ob21lL2RjaS1zdHVkZW50L0Rlc2t0b3AvV2ViLURldi9Qcm9qZWN0cy9TUEEtRmluYWwtUHJvamVjdC92aXRlLmNvbmZpZy5qc1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9pbXBvcnRfbWV0YV91cmwgPSBcImZpbGU6Ly8vaG9tZS9kY2ktc3R1ZGVudC9EZXNrdG9wL1dlYi1EZXYvUHJvamVjdHMvU1BBLUZpbmFsLVByb2plY3Qvdml0ZS5jb25maWcuanNcIjtpbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tICd2aXRlJ1xuaW1wb3J0IHJlYWN0IGZyb20gJ0B2aXRlanMvcGx1Z2luLXJlYWN0J1xuXG4vLyBodHRwczovL3ZpdGVqcy5kZXYvY29uZmlnL1xuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgc2VydmVyOiB7XG4gICAgcHJveHk6IHtcbiAgICAgICcvYXBpJzogJ2h0dHBzOi8vYXBpLmFwaS1uaW5qYXMuY29tL3YxJ1xuICAgIH1cbiAgfSxcbiAgcGx1Z2luczogW3JlYWN0KCldLFxuICBcbn0pXG4iXSwKICAibWFwcGluZ3MiOiAiO0FBQXNXLFNBQVMsb0JBQW9CO0FBQ25ZLE9BQU8sV0FBVztBQUdsQixJQUFPLHNCQUFRLGFBQWE7QUFBQSxFQUMxQixRQUFRO0FBQUEsSUFDTixPQUFPO0FBQUEsTUFDTCxRQUFRO0FBQUEsSUFDVjtBQUFBLEVBQ0Y7QUFBQSxFQUNBLFNBQVMsQ0FBQyxNQUFNLENBQUM7QUFFbkIsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

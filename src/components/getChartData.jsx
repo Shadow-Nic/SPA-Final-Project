@@ -28,10 +28,10 @@ export const calculateDayCalories = () => {
         acc.carbohydratesTotalG += food.carbohydratesTotalG;
         return acc;
     }, {
-        calories: 0,
-        fatTotalG: 0,
-        proteinG: 0,
-        carbohydratesTotalG: 0,
+        calories: 0.1,
+        fatTotalG: 0.1,
+        proteinG: 0.1,
+        carbohydratesTotalG: 0.1,
     });
     const goalCalories = burnedCalories + base;
     const achievedCalories = intakeCalories.calories;
