@@ -58,7 +58,7 @@ function ProfileDisplay() {
                     <p>Age: {selectedProfile.age}</p>
                     <p>Height: {selectedProfile.height}</p>
                     <p>
-                        Weight: {selectedProfile.weightKg} kg / {selectedProfile.weightLbs} lbs
+                        Weight: {selectedProfile.weightKg} kg / {selectedProfile.weightLbs.toFixed(2)} lbs
                     </p>
                     <p>BMI: {selectedProfile.bmi}</p>
                     <p>BMR: {selectedProfile.bmr}</p>
