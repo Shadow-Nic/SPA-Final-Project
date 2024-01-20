@@ -1,4 +1,7 @@
-import { Calendar, Badge } from 'rsuite';
+import { Calendar, Badge } from 'rsuite'
+import { calculateCalories } from './getChartData';
+import { BmiContext } from '../context/BmiContext';
+import { useContext } from 'react';
 
 function getTodoList(date) {
   const day = date.getDate();
@@ -6,30 +9,45 @@ function getTodoList(date) {
   switch (day) {
     case 10:
       return [
-        { time: '10:30 am', title: 'Meeting' },
-        { time: '12:00 pm', title: 'Lunch' }
+
       ];
     case 15:
       return [
-        { time: '09:30 pm', title: 'Products Introduction Meeting' },
-        { time: '12:30 pm', title: 'Client entertaining' },
-        { time: '02:00 pm', title: 'Product design discussion' },
-        { time: '05:00 pm', title: 'Product test and acceptance' },
-        { time: '06:30 pm', title: 'Reporting' },
-        { time: '10:00 pm', title: 'Going home to walk the dog' }
+
       ];
     default:
       return [];
   }
 }
 
+function getDayIndex(date) {
+  const { selectedProfile } = useContext(BmiContext);
+  date = date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit'
+  }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, "$1.$2.$3");
+  const dayIndex = selectedProfile.days.findIndex(day => day.date === date);
+  return dayIndex
+}
+
 const CalendarPlan = () => {
+  const { selectedProfile } = useContext(BmiContext);
+
   function renderCell(date) {
     const list = getTodoList(date);
+    const dayIndex = getDayIndex(date)
+    if (dayIndex !== -1) {
+      const { goalReached } = calculateCalories(selectedProfile.days[dayIndex]?.foods, selectedProfile.days[dayIndex]?.sports);
+      if (goalReached !== undefined) {
+        return <Badge color={`${goalReached ? 'green' : 'red'}`} />;
+      }
+    }
 
     if (list.length) {
       return <Badge className="calendar-todo-item-badge" />;
     }
+
 
     return null;
   }
@@ -40,4 +58,4 @@ const CalendarPlan = () => {
   );
 };
 
- export default CalendarPlan
+export default CalendarPlan

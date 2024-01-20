@@ -35,9 +35,9 @@ export const calculateDayCalories = () => {
     });
     const goalCalories = burnedCalories + base;
     const achievedCalories = intakeCalories.calories;
+    const goalReached = achievedCalories >= goalCalories;
 
-
-    return { intakeCalories, goalCalories, achievedCalories, burnedCalories };
+    return { intakeCalories, goalCalories, achievedCalories, burnedCalories, goalReached };
 };
 
 
@@ -52,7 +52,8 @@ export const calculateCalories = (foods, sports) => {
         return acc;
     }, 0);
     const goalCalories = burnedCalories + base;
+    const goalReached = achievedCalories >= goalCalories;
 
-    return { goalCalories, achievedCalories };
+    return { goalCalories, achievedCalories, goalReached };
 }
 
