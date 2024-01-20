@@ -193,7 +193,7 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                     )}
 
                     <Button onClick={handleClose} appearance="subtle">
-                    {detailMode ? "Close" : "Cancel"}
+                        {detailMode ? "Close" : "Cancel"}
                     </Button>
                 </Modal.Footer>
             </Modal>

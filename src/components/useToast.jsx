@@ -1,13 +1,13 @@
-import { Notification, useToaster } from 'rsuite';
+import { useToaster, Message } from 'rsuite';
 
 export function useToast() {
  const toaster = useToaster();
 
  const showToast = (type, message) => {
    toaster.push(
-    <Notification type={type} header={type} closable>
-       {message}
-     </Notification>
+    <Message showIcon type={type} closable>
+    {type}: {message}
+  </Message>
    );
  };
 

@@ -27,7 +27,7 @@ const SportSearch = ({ addedFoods, addedSports, pickDate }) => {
                 }
             }
         });
-        showToast('success', `Updated: ${fDate}`);
+        showToast('success', `Updated ${fDate}`);
     };
 
     // sport summary
