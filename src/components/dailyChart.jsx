@@ -1,93 +1,83 @@
 import Chart from 'chart.js/auto';
 import React, { useContext, useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { BmiContext } from '../context/BmiContext';
+import { Progress } from 'rsuite';
+import { BarChart, PieChart } from '@rsuite/charts';
 import { calculateDayCalories } from './getChartData';
 
-
 const DayChart = () => {
+    // Berechnung der Tageskalorien
+    const {
+        intakeCalories,
+        goalCalories,
+        achievedCalories,
+    } = calculateDayCalories();
 
-    const { intakeCalories, goalCalories, achievedCalories } = calculateDayCalories();
-    const colors = ['#34c3ff', '#1464ac', 'blue']
-    // Create the chart data for the calories chart
-    const chartDataCalories = {
-        labels: [],
-        datasets: [
-            {
-                label: 'Calories',
-                data: [achievedCalories, Math.max(0, goalCalories - achievedCalories)],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)', // Light green
-                    'rgba(255, 99, 132, 0.2)', // Light red
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)', // Dark green
-                    'rgba(255, 99, 132, 1)', // Dark red
-                ],
-                borderWidth: 1,
-            },
-        ],
+    // Berechnung des Prozentsatzes der erreichten Kalorien
+    const percentKcal = Number((achievedCalories / goalCalories * 100).toFixed(1));
+
+    // Konfiguration der Nährwerttabelle
+    const data = [
+        ['Protein', intakeCalories.proteinG.toFixed(1)],
+        ['Fat', intakeCalories.fatTotalG.toFixed(1)],
+        ['Carbs', intakeCalories.carbohydratesTotalG.toFixed(1)],
+    ];
+
+    // Status für den Fortschrittsbalken
+    const [status, setStatus] = useState('');
+
+    // Effekt zum Aktualisieren des Status
+    useEffect(() => {
+        if (percentKcal >= 100) {
+            setStatus('success');
+        } else {
+            setStatus('');
+        }
+    }, [percentKcal]);
+
+    // Style für die Komponenten
+    const styleProgress = {
+        width: 125,
+        height: 140,
     };
 
-    // Create the chart data for the nutrition chart
-    const chartDataNutrition = {
-        labels: [],
-        datasets: [
-            {
-                label: ['Fats', 'Proteins', 'Carbs'],
-                data: [intakeCalories.proteinG, intakeCalories.fatTotalG, intakeCalories.carbohydratesTotalG],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)', // Light blue
-                    'rgba(255, 206, 86, 0.2)', // Light yellow
-                    'rgba(75, 192, 192, 0.2)', // Light green
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)', // Dark blue
-                    'rgba(255, 206, 86, 1)', // Dark yellow
-                    'rgba(75, 192, 192, 1)', // Dark green
-                ],
-                borderWidth: 1,
-            },
-        ],
+    const styleNutritions = {
+        width: 150,
+        height: 220,
+        bottom: 0,
     };
 
-    // Create the chart options
-    const options = {
-        responsive: true,
-        plugins: {
+    const config = {
+        legend: {
+            top: '0',
         },
     };
-    const dataNut =
-        [
-            ['Protein', 50],
-            ['Fat', 50],
-            ['Carbs', 50]
-        ]
 
-    // Render the charts
+    // Methode zur Anzeige des Fortschrittsbalkens
+    const renderProgressCircle = (status) => {
+        if (status === 'success') {
+            return <Progress.Circle percent={percentKcal} style={styleProgress} status="success" />;
+        } else if (status === 'fail') {
+            return <Progress.Circle percent={percentKcal} style={styleProgress} status="fail" />;
+        } else {
+            return <Progress.Circle percent={percentKcal} style={styleProgress} />;
+        }
+    };
+
+    // Render-Methode für die Komponente
     return (
-        <div style={{ height: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }} >
-            <h3 style={{ marginBottom: '0' }}>Daily</h3>
+        <div className='daily'>
+            <h3>Daily</h3>
             <div className='wrapperChart'>
-                <div className='con1' >
-                    <p>Calories</p>
-                    <p>{achievedCalories.toFixed(2)}kcal /{goalCalories}kcal </p>
-                    <div className='dailyChart'>
-                        <Doughnut data={chartDataCalories} options={options} style={{ width: '65%', height: '65%' }} />
-                    </div>
+                <div className='chartKcal'>
+                    <p><strong>{parseInt(achievedCalories)} / {goalCalories}kcal</strong></p>
+                    {renderProgressCircle(status)}
                 </div>
-                <div className='con2'>
-                    <div className='dailyChart'>
-                        <Doughnut data={chartDataNutrition} options={options} style={{ width: '65%', height: '65%' }} />
-                    </div>
-                    <ul>
-                        <li>{intakeCalories.proteinG.toFixed(1)}g Proteins,</li>
-                        <li>{intakeCalories.fatTotalG.toFixed(1)}g Fats,</li>
-                        <li>{intakeCalories.carbohydratesTotalG.toFixed(1)}g Carbs</li>
-                    </ul>
+                <div className='chartNutrition'>
+                    <PieChart name="Nutritions" style={styleNutritions} data={data} option={config} label={false} />
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

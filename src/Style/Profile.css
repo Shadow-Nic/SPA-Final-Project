@@ -65,30 +65,33 @@
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
 }
-.con1,.con2{
-display: flex;
-flex-direction: column;
-width: 50%;
-height: 100%;
-align-items: center;
-justify-content: center;
- }
- 
+
 
  .wrapperChart{
-    border-radius: 15px;
-    display: flex;
-    background-color:white ;
-    justify-content: space-between;
     height: 200px;
     width: 300px;
-    gap: 15px;
-  
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    background-color:white ;
  }
- .dailyChart{
-    height: 100%;
- }
+ .chartKcal{
+    display: flex;
+    flex-direction: column;
+ gap: 32px;
+ text-align: center;
 
+ }
+ .chartNutrition{
+bottom: -20;
+}
+.daily{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white !important;
+}
+ 
  .chartSlider{
     border-radius: 15px;
     height: auto !important;
