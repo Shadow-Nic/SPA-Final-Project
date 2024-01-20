@@ -57,7 +57,7 @@ function BmiCalculator() {
         } else {
             bmrVal = 10 * weightKg + 6.26 * height - 5 * age - 161;
         }
-        return Math.round(bmrVal);
+        return Math.round(bmrVal * 1.3);
     };
 
     const calculateBmi = () => {
@@ -75,7 +75,7 @@ function BmiCalculator() {
             } else {
                 categoryMsg = 'Obese';
             }
-     
+
             dispatch({
                 type: 'ADD_PROFILE',
                 payload: {

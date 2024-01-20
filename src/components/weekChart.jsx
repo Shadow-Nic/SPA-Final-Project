@@ -1,36 +1,35 @@
 import Chart from 'chart.js/auto';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
+import { calculateCalories } from './getChartData';
+import { BmiContext } from '../context/BmiContext';
 
-const WeekChart = ({ data }) => {
+const WeekChart = () => {
+    const { selectedProfile } = useContext(BmiContext);
 
-    const last7DaysData = data.slice(-7);
+    const last7DaysData = selectedProfile.days.slice(0, 7).map(day => {
+        const { goalCalories, achievedCalories, bmr } = calculateCalories(day.foods, day.sports);
+        return { ...day, goalCalories, achievedCalories };
+    }).reverse();
 
     const chartData = {
         labels: last7DaysData.map(item => item.date),
         datasets: [
             {
-                type: 'bar',
-                label: 'Intake Calories',
-                data: last7DaysData.map(item => item.todayCalories),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                type: 'line',
+                label: 'Required',
+                data: last7DaysData.map(item => item.goalCalories),
+                backgroundColor: 'red',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             },
             {
                 type: 'bar',
-                label: 'Burned Calories',
-                data: last7DaysData.map(item => item.todayBurnedCalories),
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1,
-            }, {
-                type: 'line',
-                label: 'Calories',
-                data: last7DaysData.map(item => (item.todayCalories - item.todayBurnedCalories)),
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1,
+                label: 'Total kcal',
+                data: last7DaysData.map(item => (item.achievedCalories)),
+                backgroundColor: 'green',
+                borderColor: 'green',
+                borderWidth: 2,
             },
         ],
     };
@@ -42,22 +41,21 @@ const WeekChart = ({ data }) => {
                 <Bar
                     data={chartData}
                     options={{
-                        title: {
-                            display: true,
-                            text: 'Weekly Calories',
-                            fontSize: 24,
-                        },
                         legend: {
-                            display: true,
+                            display: false,
                             position: 'top',
                         },
                         responsive: true,
                         maintainAspectRatio: false,
+
                         scales: {
-                            y: {
-                                beginAtZero: true,
+                            x: {
+                                stacked: true,
                             },
-                        },
+                            y: {
+                                stacked: true
+                            }
+                        }
                     }}
                 />
             </div>

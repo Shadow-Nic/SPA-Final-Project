@@ -1,0 +1,747 @@
+{
+    "id": 1,
+    "name": "Sample",
+    "height": "180",
+    "weightKg": "75",
+    "weightLbs": 165.3465,
+    "unit": "kg",
+    "gender": "",
+    "age": "30",
+    "bmr": 2036,
+    "bmi": "23.15",
+    "category": "Normal weight",
+    "days": [
+        {
+            "date": "14.01.23",
+            "sports": [
+                {
+                    "name": "Cycling, moderate effort",
+                    "caloriesPerHour": 565,
+                    "durationMinutes": 60,
+                    "totalCalories": 565
+                },
+                {
+                    "name": "Yoga",
+                    "caloriesPerHour": 240,
+                    "durationMinutes": 60,
+                    "totalCalories": 240
+                }
+            ],
+            "foods": [
+                {
+                    "name": "peach",
+                    "calories": 39.9,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.3,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.9,
+                    "sodiumMg": 0,
+                    "potassiumMg": 20,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 9.7,
+                    "fiberG": 1.5,
+                    "sugarG": 8.5
+                },
+                {
+                    "name": "carrot salad",
+                    "calories": 207.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 15.3,
+                    "fatSaturatedG": 2.4,
+                    "proteinG": 1,
+                    "sodiumMg": 163,
+                    "potassiumMg": 31,
+                    "cholesterolMg": 8,
+                    "carbohydratesTotalG": 17.9,
+                    "fiberG": 1.8,
+                    "sugarG": 13.4
+                },
+                {
+                    "name": "pear",
+                    "calories": 56.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.1,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.4,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.9,
+                    "fiberG": 3.1,
+                    "sugarG": 9.8
+                }
+            ]
+        },
+        {
+            "date": "15.01.23",
+            "sports": [
+                {
+                    "name": "Running",
+                    "caloriesPerHour": 600,
+                    "durationMinutes": 45,
+                    "totalCalories": 450
+                },
+                {
+                    "name": "Swimming, leisure",
+                    "caloriesPerHour": 425,
+                    "durationMinutes": 60,
+                    "totalCalories": 425
+                }
+            ],
+            "foods": [
+                {
+                    "name": "fries",
+                    "calories": 317.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.8,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.4,
+                    "sodiumMg": 212,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 41.1,
+                    "fiberG": 3.8,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "steak",
+                    "calories": 273.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 18.8,
+                    "fatSaturatedG": 7.3,
+                    "proteinG": 26,
+                    "sodiumMg": 52,
+                    "potassiumMg": 194,
+                    "cholesterolMg": 95,
+                    "carbohydratesTotalG": 0,
+                    "fiberG": 0,
+                    "sugarG": 0
+                },
+                {
+                    "name": "apple",
+                    "calories": 53,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.2,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.3,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.1,
+                    "fiberG": 2.4,
+                    "sugarG": 10.3
+                }
+            ]
+        },
+        {
+            "date": "11.01.24",
+            "sports": [
+                {
+                    "name": "Playing tennis",
+                    "caloriesPerHour": 525,
+                    "durationMinutes": 60,
+                    "totalCalories": 522
+                },
+                {
+                    "name": "Football, competitive",
+                    "caloriesPerHour": 675,
+                    "durationMinutes": 60,
+                    "totalCalories": 672
+                }
+            ],
+            "foods": [
+                {
+                    "name": "steak fries",
+                    "calories": 320.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.4,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.5,
+                    "sodiumMg": 209,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 42.2,
+                    "fiberG": 3.7,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "icecream",
+                    "calories": 206.8,
+                    "servingSizeG": 100,
+                    "fatTotalG": 11,
+                    "fatSaturatedG": 6.7,
+                    "proteinG": 3.5,
+                    "sodiumMg": 78,
+                    "potassiumMg": 104,
+                    "cholesterolMg": 44,
+                    "carbohydratesTotalG": 23.3,
+                    "fiberG": 0.7,
+                    "sugarG": 21.1
+                },
+                {
+                    "name": "bratwurst",
+                    "calories": 324.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 28.7,
+                    "fatSaturatedG": 9.9,
+                    "proteinG": 13.7,
+                    "sodiumMg": 830,
+                    "potassiumMg": 207,
+                    "cholesterolMg": 74,
+                    "carbohydratesTotalG": 2.8,
+                    "fiberG": 0,
+                    "sugarG": 0
+                }
+            ]
+        },
+        {
+            "date": "12.01.24",
+            "sports": [
+                {
+                    "name": "Cycling, moderate effort",
+                    "caloriesPerHour": 565,
+                    "durationMinutes": 60,
+                    "totalCalories": 565
+                },
+                {
+                    "name": "Yoga",
+                    "caloriesPerHour": 240,
+                    "durationMinutes": 60,
+                    "totalCalories": 240
+                }
+            ],
+            "foods": [
+                {
+                    "name": "peach",
+                    "calories": 39.9,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.3,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.9,
+                    "sodiumMg": 0,
+                    "potassiumMg": 20,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 9.7,
+                    "fiberG": 1.5,
+                    "sugarG": 8.5
+                },
+                {
+                    "name": "carrot salad",
+                    "calories": 207.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 15.3,
+                    "fatSaturatedG": 2.4,
+                    "proteinG": 1,
+                    "sodiumMg": 163,
+                    "potassiumMg": 31,
+                    "cholesterolMg": 8,
+                    "carbohydratesTotalG": 17.9,
+                    "fiberG": 1.8,
+                    "sugarG": 13.4
+                },
+                {
+                    "name": "pear",
+                    "calories": 56.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.1,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.4,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.9,
+                    "fiberG": 3.1,
+                    "sugarG": 9.8
+                }
+            ]
+        },
+        {
+            "date": "18.01.24",
+            "sports": [
+                {
+                    "name": "Running",
+                    "caloriesPerHour": 600,
+                    "durationMinutes": 45,
+                    "totalCalories": 450
+                },
+                {
+                    "name": "Swimming, leisure",
+                    "caloriesPerHour": 425,
+                    "durationMinutes": 60,
+                    "totalCalories": 425
+                }
+            ],
+            "foods": [
+                {
+                    "name": "fries",
+                    "calories": 317.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.8,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.4,
+                    "sodiumMg": 212,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 41.1,
+                    "fiberG": 3.8,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "steak",
+                    "calories": 273.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 18.8,
+                    "fatSaturatedG": 7.3,
+                    "proteinG": 26,
+                    "sodiumMg": 52,
+                    "potassiumMg": 194,
+                    "cholesterolMg": 95,
+                    "carbohydratesTotalG": 0,
+                    "fiberG": 0,
+                    "sugarG": 0
+                },
+                {
+                    "name": "apple",
+                    "calories": 53,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.2,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.3,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.1,
+                    "fiberG": 2.4,
+                    "sugarG": 10.3
+                }
+            ]
+        },
+        {
+            "date": "13.01.24",
+            "sports": [
+                {
+                    "name": "Playing tennis",
+                    "caloriesPerHour": 525,
+                    "durationMinutes": 60,
+                    "totalCalories": 522
+                },
+                {
+                    "name": "Football, competitive",
+                    "caloriesPerHour": 675,
+                    "durationMinutes": 60,
+                    "totalCalories": 672
+                }
+            ],
+            "foods": [
+                {
+                    "name": "steak fries",
+                    "calories": 320.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.4,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.5,
+                    "sodiumMg": 209,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 42.2,
+                    "fiberG": 3.7,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "icecream",
+                    "calories": 206.8,
+                    "servingSizeG": 100,
+                    "fatTotalG": 11,
+                    "fatSaturatedG": 6.7,
+                    "proteinG": 3.5,
+                    "sodiumMg": 78,
+                    "potassiumMg": 104,
+                    "cholesterolMg": 44,
+                    "carbohydratesTotalG": 23.3,
+                    "fiberG": 0.7,
+                    "sugarG": 21.1
+                },
+                {
+                    "name": "bratwurst",
+                    "calories": 324.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 28.7,
+                    "fatSaturatedG": 9.9,
+                    "proteinG": 13.7,
+                    "sodiumMg": 830,
+                    "potassiumMg": 207,
+                    "cholesterolMg": 74,
+                    "carbohydratesTotalG": 2.8,
+                    "fiberG": 0,
+                    "sugarG": 0
+                }
+            ]
+        },
+        {
+            "date": "14.01.24",
+            "sports": [
+                {
+                    "name": "Cycling, moderate effort",
+                    "caloriesPerHour": 565,
+                    "durationMinutes": 60,
+                    "totalCalories": 565
+                },
+                {
+                    "name": "Yoga",
+                    "caloriesPerHour": 240,
+                    "durationMinutes": 60,
+                    "totalCalories": 240
+                }
+            ],
+            "foods": [
+                {
+                    "name": "peach",
+                    "calories": 39.9,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.3,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.9,
+                    "sodiumMg": 0,
+                    "potassiumMg": 20,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 9.7,
+                    "fiberG": 1.5,
+                    "sugarG": 8.5
+                },
+                {
+                    "name": "carrot salad",
+                    "calories": 207.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 15.3,
+                    "fatSaturatedG": 2.4,
+                    "proteinG": 1,
+                    "sodiumMg": 163,
+                    "potassiumMg": 31,
+                    "cholesterolMg": 8,
+                    "carbohydratesTotalG": 17.9,
+                    "fiberG": 1.8,
+                    "sugarG": 13.4
+                },
+                {
+                    "name": "pear",
+                    "calories": 56.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.1,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.4,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.9,
+                    "fiberG": 3.1,
+                    "sugarG": 9.8
+                }
+            ]
+        },
+        {
+            "date": "15.01.24",
+            "sports": [
+                {
+                    "name": "Running",
+                    "caloriesPerHour": 600,
+                    "durationMinutes": 45,
+                    "totalCalories": 450
+                },
+                {
+                    "name": "Swimming, leisure",
+                    "caloriesPerHour": 425,
+                    "durationMinutes": 60,
+                    "totalCalories": 425
+                }
+            ],
+            "foods": [
+                {
+                    "name": "fries",
+                    "calories": 317.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.8,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.4,
+                    "sodiumMg": 212,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 41.1,
+                    "fiberG": 3.8,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "steak",
+                    "calories": 273.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 18.8,
+                    "fatSaturatedG": 7.3,
+                    "proteinG": 26,
+                    "sodiumMg": 52,
+                    "potassiumMg": 194,
+                    "cholesterolMg": 95,
+                    "carbohydratesTotalG": 0,
+                    "fiberG": 0,
+                    "sugarG": 0
+                },
+                {
+                    "name": "apple",
+                    "calories": 53,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.2,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.3,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.1,
+                    "fiberG": 2.4,
+                    "sugarG": 10.3
+                }
+            ]
+        },
+        {
+            "date": "16.01.24",
+            "sports": [
+                {
+                    "name": "Playing tennis",
+                    "caloriesPerHour": 525,
+                    "durationMinutes": 60,
+                    "totalCalories": 522
+                },
+                {
+                    "name": "Football, competitive",
+                    "caloriesPerHour": 675,
+                    "durationMinutes": 60,
+                    "totalCalories": 672
+                }
+            ],
+            "foods": [
+                {
+                    "name": "steak fries",
+                    "calories": 320.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.4,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.5,
+                    "sodiumMg": 209,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 42.2,
+                    "fiberG": 3.7,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "icecream",
+                    "calories": 206.8,
+                    "servingSizeG": 100,
+                    "fatTotalG": 11,
+                    "fatSaturatedG": 6.7,
+                    "proteinG": 3.5,
+                    "sodiumMg": 78,
+                    "potassiumMg": 104,
+                    "cholesterolMg": 44,
+                    "carbohydratesTotalG": 23.3,
+                    "fiberG": 0.7,
+                    "sugarG": 21.1
+                },
+                {
+                    "name": "bratwurst",
+                    "calories": 324.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 28.7,
+                    "fatSaturatedG": 9.9,
+                    "proteinG": 13.7,
+                    "sodiumMg": 830,
+                    "potassiumMg": 207,
+                    "cholesterolMg": 74,
+                    "carbohydratesTotalG": 2.8,
+                    "fiberG": 0,
+                    "sugarG": 0
+                }
+            ]
+        },
+        {
+            "date": "17.01.24",
+            "sports": [
+                {
+                    "name": "Cycling, moderate effort",
+                    "caloriesPerHour": 565,
+                    "durationMinutes": 60,
+                    "totalCalories": 565
+                },
+                {
+                    "name": "Yoga",
+                    "caloriesPerHour": 240,
+                    "durationMinutes": 60,
+                    "totalCalories": 240
+                }
+            ],
+            "foods": [
+                {
+                    "name": "peach",
+                    "calories": 39.9,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.3,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.9,
+                    "sodiumMg": 0,
+                    "potassiumMg": 20,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 9.7,
+                    "fiberG": 1.5,
+                    "sugarG": 8.5
+                },
+                {
+                    "name": "carrot salad",
+                    "calories": 207.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 15.3,
+                    "fatSaturatedG": 2.4,
+                    "proteinG": 1,
+                    "sodiumMg": 163,
+                    "potassiumMg": 31,
+                    "cholesterolMg": 8,
+                    "carbohydratesTotalG": 17.9,
+                    "fiberG": 1.8,
+                    "sugarG": 13.4
+                },
+                {
+                    "name": "pear",
+                    "calories": 56.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.1,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.4,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.9,
+                    "fiberG": 3.1,
+                    "sugarG": 9.8
+                }
+            ]
+        },
+        {
+            "date": "18.01.24",
+            "sports": [
+                {
+                    "name": "Running",
+                    "caloriesPerHour": 600,
+                    "durationMinutes": 45,
+                    "totalCalories": 450
+                },
+                {
+                    "name": "Swimming, leisure",
+                    "caloriesPerHour": 425,
+                    "durationMinutes": 60,
+                    "totalCalories": 425
+                }
+            ],
+            "foods": [
+                {
+                    "name": "fries",
+                    "calories": 317.7,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.8,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.4,
+                    "sodiumMg": 212,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 41.1,
+                    "fiberG": 3.8,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "steak",
+                    "calories": 273.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 18.8,
+                    "fatSaturatedG": 7.3,
+                    "proteinG": 26,
+                    "sodiumMg": 52,
+                    "potassiumMg": 194,
+                    "cholesterolMg": 95,
+                    "carbohydratesTotalG": 0,
+                    "fiberG": 0,
+                    "sugarG": 0
+                },
+                {
+                    "name": "apple",
+                    "calories": 53,
+                    "servingSizeG": 100,
+                    "fatTotalG": 0.2,
+                    "fatSaturatedG": 0,
+                    "proteinG": 0.3,
+                    "sodiumMg": 1,
+                    "potassiumMg": 11,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 14.1,
+                    "fiberG": 2.4,
+                    "sugarG": 10.3
+                }
+            ]
+        },
+        {
+            "date": "19.01.24",
+            "sports": [
+                {
+                    "name": "Playing tennis",
+                    "caloriesPerHour": 525,
+                    "durationMinutes": 60,
+                    "totalCalories": 522
+                },
+                {
+                    "name": "Football, competitive",
+                    "caloriesPerHour": 675,
+                    "durationMinutes": 60,
+                    "totalCalories": 672
+                }
+            ],
+            "foods": [
+                {
+                    "name": "steak fries",
+                    "calories": 320.4,
+                    "servingSizeG": 100,
+                    "fatTotalG": 14.4,
+                    "fatSaturatedG": 2.3,
+                    "proteinG": 3.5,
+                    "sodiumMg": 209,
+                    "potassiumMg": 124,
+                    "cholesterolMg": 0,
+                    "carbohydratesTotalG": 42.2,
+                    "fiberG": 3.7,
+                    "sugarG": 0.3
+                },
+                {
+                    "name": "icecream",
+                    "calories": 206.8,
+                    "servingSizeG": 100,
+                    "fatTotalG": 11,
+                    "fatSaturatedG": 6.7,
+                    "proteinG": 3.5,
+                    "sodiumMg": 78,
+                    "potassiumMg": 104,
+                    "cholesterolMg": 44,
+                    "carbohydratesTotalG": 23.3,
+                    "fiberG": 0.7,
+                    "sugarG": 21.1
+                },
+                {
+                    "name": "bratwurst",
+                    "calories": 324.2,
+                    "servingSizeG": 100,
+                    "fatTotalG": 28.7,
+                    "fatSaturatedG": 9.9,
+                    "proteinG": 13.7,
+                    "sodiumMg": 830,
+                    "potassiumMg": 207,
+                    "cholesterolMg": 74,
+                    "carbohydratesTotalG": 2.8,
+                    "fiberG": 0,
+                    "sugarG": 0
+                }
+            ]
+        }
+    ]
+}

@@ -22,25 +22,18 @@ function ProfileDisplay() {
 
 
     function UserGreeting() {
-        let days = selectedProfile.days;
-        let dayIndex = days.findIndex(day => day.date === currentDate);
 
         return (
             <div className='Charts'>
                 <Carousel controls={false}>
                     <Carousel.Item>
-                        <DayChart
-                            data={selectedProfile.days[dayIndex]}
-                        />
+                        <DayChart />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <WeekChart
-                            data={days}
-                        />
+                        <WeekChart />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <MonthlyChart
-                            data={days} />
+                        <MonthlyChart />
                     </Carousel.Item>
                 </Carousel>
             </div>
