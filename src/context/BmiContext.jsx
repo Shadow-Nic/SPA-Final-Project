@@ -9,7 +9,7 @@ function bmiReducer(state, action) {
             const newState = [...state, action.payload];
             localStorage.setItem('profiles', JSON.stringify(newState));
             return newState;
-
+        
         case 'ADD_DAY':
             const { profileId, dayData } = action.payload;
             const updatedState = [...state];

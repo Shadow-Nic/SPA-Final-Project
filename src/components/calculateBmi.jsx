@@ -14,14 +14,14 @@ function BmiCalculator() {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
-    let ids = Object.values(localStorage)
-        .filter(item => item.startsWith('{')) // filter out non-objects
-        .map(item => JSON.parse(item)) // parse the objects
-        .map(item => item.id) // get the id of each object
-        .filter(id => !isNaN(id)) // filter out non-numbers
-        .sort((a, b) => b - a); // sort in descending order
 
-    const [id, setId] = useState(ids[0] || 1); // set the initial id
+    const [id, setId] = useState(() => {
+        const savedProfiles = JSON.parse(localStorage.getItem('profiles'));
+        return savedProfiles ? savedProfiles.length : 0;
+    });
+    
+    
+
 
 
     const handleHeightChange = (event) => {
