@@ -1,7 +1,7 @@
 import React from 'react';
 
 //rsuite components
-import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader } from 'rsuite';
+import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader, Divider } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
 //shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons 4.Toast
@@ -123,7 +123,7 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                 </InputGroup.Addon>
             </InputGroup>
             <SportList />
-            {addedSports.length > 0 && <h3>Added Sports:</h3>}
+            {addedSports.length > 0 && <Divider>Added Activitys</Divider>}
 
             <TagGroup>
                 <AddedSportsList />
