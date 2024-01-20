@@ -20,7 +20,7 @@ const MonthlyChart = () => {
                 label: 'Required',
                 data: last30DaysData.map(item => item.goalCalories),
                 backgroundColor: 'red',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'red',
                 borderWidth: 1,
             },
             {
@@ -36,8 +36,8 @@ const MonthlyChart = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-            <p style={{ marginBottom: '0' }}>Monthly</p>
+        <div style={{ height: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }} >
+            <h3 style={{ marginBottom: '0' }}>Monthly</h3>
             <div style={{ width: '300px', height: '200px', display: 'flex' }}>
                 <Bar
                     data={chartData}

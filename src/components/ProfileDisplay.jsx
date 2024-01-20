@@ -4,7 +4,7 @@ import DayChart from './dailyChart';
 import '../Style/Profile.css'
 import WeekChart from './weekChart';
 import MonthlyChart from './monthlyChart';
-import { Carousel } from 'react-bootstrap';
+import { Carousel } from 'rsuite';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -25,17 +25,22 @@ function ProfileDisplay() {
 
         return (
             <div className='Charts'>
-                <Carousel controls={false}>
-                    <Carousel.Item>
-                        <DayChart />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <WeekChart />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <MonthlyChart />
-                    </Carousel.Item>
+                <Carousel
+                    key={``}
+                    placement={'bottom'}
+                    shape={'bar'}
+                    className="chartSlider"
+                    as={'div'}
+                    autoplay={false}
+                    autoplayInterval={5000}
+                >
+                    <div><DayChart /></div>
+                    <div><WeekChart /></div>
+                    <div><MonthlyChart /></div>
                 </Carousel>
+
+
+
             </div>
         );
     }
