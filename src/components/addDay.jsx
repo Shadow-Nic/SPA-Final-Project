@@ -65,7 +65,7 @@ function addDay() {
     const Tabbar = ({ active, onSelect, ...props }) => {
         return (
             <div>
-                <Nav {...props} activeKey={active} onSelect={onSelect}>
+                <Nav  justified {...props} activeKey={active} onSelect={onSelect}>
                     <Nav.Item eventKey="food" >Meal's 🍕 </Nav.Item>
                     <Nav.Item eventKey="sport">Activity's 🤸🏽‍♀️ </Nav.Item>
                     <Nav.Item eventKey="sum">Summary 📋</Nav.Item>
