@@ -11,7 +11,7 @@ import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
 import { useToast } from './useToast';
 
 //css
-import '../Style/FoodSearch.css'
+import '../Style/Search.css'
 
 // component start
 const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSports }) => {
@@ -132,7 +132,7 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
             <Modal
                 open={open}
                 onClose={handleClose}
-                className={detailMode ? 'modalDetail' : 'modalPop'}
+                className={detailMode ? 'modalDetailSport' : 'modalPop'}
             >
                 <Modal.Header>
                     <Modal.Title>{detailMode ? `${capitalizeAllWords(selectedSport.name)}'s stats` : 'Change Duration (minutes)'}</Modal.Title>

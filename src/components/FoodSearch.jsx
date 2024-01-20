@@ -11,7 +11,7 @@ import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
 import { useToast } from './useToast';
 
 //css
-import '../Style/FoodSearch.css'
+import '../Style/Search.css'
 
 // component Start
 const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) => {
