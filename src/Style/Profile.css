@@ -85,12 +85,15 @@
  .chartNutrition{
 bottom: -20;
 }
-.daily{
+.Wrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white !important;
+    height: 250px;
+    overflow: hidden;
 }
+
  
  .chartSlider{
     border-radius: 15px;

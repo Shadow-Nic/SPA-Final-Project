@@ -66,7 +66,7 @@ const DayChart = () => {
 
     // Render-Methode für die Komponente
     return (
-        <div className='daily'>
+        <div className='Wrapper'>
             <h3>Daily</h3>
             <div className='wrapperChart'>
                 <div className='chartKcal'>

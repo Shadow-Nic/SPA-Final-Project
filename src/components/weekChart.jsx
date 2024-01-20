@@ -1,8 +1,8 @@
-import Chart from 'chart.js/auto';
-import React, { useContext } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
+
+import React, { useContext, useMemo } from 'react';
 import { calculateCalories } from './getChartData';
 import { BmiContext } from '../context/BmiContext';
+import { BarChart, YAxis, Bars, Line } from '@rsuite/charts';
 
 const WeekChart = () => {
     const { selectedProfile } = useContext(BmiContext);
@@ -12,53 +12,32 @@ const WeekChart = () => {
         return { ...day, goalCalories, achievedCalories };
     });
 
-    const chartData = {
-        labels: last7DaysData.map(item => item.date),
-        datasets: [
-            {
-                type: 'line',
-                label: 'Required',
-                data: last7DaysData.map(item => item.goalCalories),
-                backgroundColor: 'red',
-                borderColor: 'red',
-                borderWidth: 1,
-            },
-            {
-                type: 'bar',
-                label: 'Total kcal',
-                data: last7DaysData.map(item => (item.achievedCalories)),
-                backgroundColor: 'green',
-                borderColor: 'green',
-                borderWidth: 2,
-            },
-        ],
+
+    const data = last7DaysData.map(item => [item.date, parseInt(item.achievedCalories), parseInt(item.goalCalories)]);
+
+    // Calculate the minimum value for YAxis
+    const minAchievedCalories = useMemo(() => {
+        return Math.min(...last7DaysData.map(item => parseInt(item.achievedCalories))) - 100;
+    }, [last7DaysData]);
+
+    const style = {
+        height: 250,
+        width: 330
+    }
+    const config = {
+        legend: {
+            top: '0',
+        },
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }} >
-            <h3 style={{ marginBottom: '0' }}>Weekly</h3>
-            <div style={{ width: '300px', height: '200px', display: 'flex' }}>
-                <Bar
-                    data={chartData}
-                    options={{
-                        legend: {
-                            display: false,
-                            position: 'top',
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false,
-
-                        scales: {
-                            x: {
-                                stacked: true,
-                            },
-                            y: {
-                                stacked: true
-                            }
-                        }
-                    }}
-                />
-            </div>
+        <div className='Wrapper' >
+            <h3>Weekly</h3>
+            <BarChart data={data} style={style} option={config} >
+                <YAxis minInterval={200} min={minAchievedCalories - 500} axisLabel={(value) => `${value / 1}`} />
+                <Bars name="Kcal" />
+                <Line name="Required" />
+            </BarChart>
         </div>
     );
 };
