@@ -26,7 +26,7 @@ const Header = () => {
      <header>
        <div className="header">
       <div className='picker'>
-       <SelectPicker value={JSON.stringify(selectedProfile)} data={data}  onChange={handleProfileSelect}/>
+       <SelectPicker cleanable={false} value={JSON.stringify(selectedProfile)} data={data}  onChange={handleProfileSelect}/>
        </div>
         
          <img src="/src/assets/Logo-NoBG.png" alt="Fitify Logo" />
