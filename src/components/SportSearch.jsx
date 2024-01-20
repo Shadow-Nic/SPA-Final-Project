@@ -116,7 +116,7 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
     /// Main Search input
     return (
         <div>
-            <InputGroup>
+            <InputGroup className='searchGroup'>
                 <DebounceInput
                     className="searchInput"
                     type="text"

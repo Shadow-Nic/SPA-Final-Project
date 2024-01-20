@@ -1,5 +1,12 @@
 .searchInput{
+    margin-top: 10px;
 width: 100%;
+font-size: 18px;
+border-radius: 0;
+padding: 15px;
+}
+div.searchGroup{
+    border-top: 0; 
 }
 .modalPop{
     top:33vh;

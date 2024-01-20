@@ -138,7 +138,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
 
     return (
         <div>
-            <InputGroup>
+            <InputGroup className='searchGroup'>
                 <DebounceInput
                     className="searchInput"
                     type="text"

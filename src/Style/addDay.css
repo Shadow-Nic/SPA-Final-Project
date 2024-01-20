@@ -3,4 +3,12 @@
 }
 .rs-nav-item {
     font-size: 3.6vw;
+    font-weight:600;
+   }
+
+   .rs-nav-tabs.rs-nav-horizontal > .rs-nav-item,[aria-selected="false"] {
+    opacity: 60%;
+   }
+   .rs-nav-tabs.rs-nav-horizontal .rs-nav-item.rs-nav-item-active{
+    opacity: 100%;
    }
