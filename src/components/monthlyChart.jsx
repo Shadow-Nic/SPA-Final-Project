@@ -1,38 +1,37 @@
 import Chart from 'chart.js/auto';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
+import { calculateCalories } from './getChartData';
+import { BmiContext } from '../context/BmiContext';
 
-const MonthlyChart = ({ data }) => {
+const MonthlyChart = () => {
 
-    const last30DaysData = data.slice(-30);
-
+    const { selectedProfile } = useContext(BmiContext);
+    const last30DaysData = selectedProfile.days.slice(0, 30).map(day => {
+        const { goalCalories, achievedCalories, bmr } = calculateCalories(day.foods, day.sports);
+        return { ...day, goalCalories, achievedCalories, bmr };
+    }).reverse();
 
     const chartData = {
         labels: last30DaysData.map(item => item.date),
         datasets: [
             {
-                type: 'bar',
-                label: 'Intake Calories',
-                data: last30DaysData.map(item => item.todayCalories),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                type: 'line',
+                label: 'Required',
+                data: last30DaysData.map(item => item.goalCalories),
+                backgroundColor: 'red',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             },
             {
                 type: 'bar',
-                label: 'Burned Calories',
-                data: last30DaysData.map(item => item.todayBurnedCalories),
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1,
-            }, {
-                type: 'line',
-                label: 'Calories',
-                data: last30DaysData.map(item => (item.todayCalories - item.todayBurnedCalories)),
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1,
+                label: 'Total kcal',
+                data: last30DaysData.map(item => (item.achievedCalories)),
+                backgroundColor: 'green',
+                borderColor: 'green',
+                borderWidth: 2,
             },
+
         ],
     };
 
@@ -43,22 +42,21 @@ const MonthlyChart = ({ data }) => {
                 <Bar
                     data={chartData}
                     options={{
-                        title: {
-                            display: true,
-                            text: 'Weekly Calories',
-                            fontSize: 24,
-                        },
                         legend: {
-                            display: true,
+                            display: false,
                             position: 'top',
                         },
                         responsive: true,
                         maintainAspectRatio: false,
+
                         scales: {
-                            y: {
-                                beginAtZero: true,
+                            x: {
+                                stacked: true,
                             },
-                        },
+                            y: {
+                                stacked: true
+                            }
+                        }
                     }}
                 />
             </div>

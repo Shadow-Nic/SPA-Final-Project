@@ -46,3 +46,36 @@
 .statistik button {
     display: none;
 }
+
+.statistik{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 30px 0px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Oswald', sans-serif;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+.con1,.con2{
+display: flex;
+flex-direction: column;
+width: 50%;
+height: 100%;
+align-items: center;
+justify-content: center;
+ }
+ 
+
+ .wrapperChart{
+    display: flex;
+    height: 200px;
+ }
+ .dailyChart{
+    height: 100%;
+ }
