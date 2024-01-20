@@ -75,8 +75,8 @@ Form {
     padding-top: 10%;
 }
 
-.custom-calendar-cell {
-    border-color: black !important;
-   }
-   
+
+ .rs-tag {
+    background-color: #F8C88E;
+ }
    
