@@ -10,7 +10,7 @@ const WeekChart = () => {
     const last7DaysData = selectedProfile.days.slice(0, 7).map(day => {
         const { goalCalories, achievedCalories, bmr } = calculateCalories(day.foods, day.sports);
         return { ...day, goalCalories, achievedCalories };
-    }).reverse();
+    });
 
     const chartData = {
         labels: last7DaysData.map(item => item.date),

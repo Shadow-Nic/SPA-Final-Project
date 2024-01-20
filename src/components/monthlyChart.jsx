@@ -10,7 +10,7 @@ const MonthlyChart = () => {
     const last30DaysData = selectedProfile.days.slice(0, 30).map(day => {
         const { goalCalories, achievedCalories } = calculateCalories(day.foods, day.sports);
         return { ...day, goalCalories, achievedCalories };
-    }).reverse();
+    });
 
     const chartData = {
         labels: last30DaysData.map(item => item.date),
