@@ -1,5 +1,15 @@
 @import "rsuite/dist/rsuite.css";
 
+
+.main {
+    display: flex;
+    flex-direction: column;
+    background-color: #E3E3F3;
+    height: 100vh;
+    font-family: 'Oswald', sans-serif;
+    
+}
+
 /* Header */
 
 header {
@@ -31,6 +41,16 @@ header {
     
 }
 
+.header button:hover {
+    background-color: transparent;
+    color: #E09836;
+}
+
+.header button:focus {
+    background-color: transparent;
+    color: #E09836;
+}
+
 .picker{
     position:absolute;
     width: 100px;
@@ -39,9 +59,35 @@ header {
     
 }
 
+/* addProfile */
+
+Form {
+    width: 90vw;
+    
+}
+
+.fillInForm {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: black;
+}
+
+.calcButton {
+    margin-top: 15px;
+}
+
+
 /* Kalender */
 
 .calendar {
     width: 100vw;
     padding-top: 10%;
 }
+
+
+ .rs-tag {
+    background-color: #F8C88E;
+ }
+   
+ 

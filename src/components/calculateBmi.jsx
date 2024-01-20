@@ -99,6 +99,8 @@ function BmiCalculator() {
     };
 
     return (
+        <div className='main'>
+            <div className='fillInForm'>
         <Form>
            <div>
                <Form.ControlLabel>Name:</Form.ControlLabel>
@@ -130,8 +132,10 @@ function BmiCalculator() {
                   <option value="Female">Female</option>
                </Input>
            </div>
-           <Button onClick={calculateBmi}>Calculate BMI</Button>
+           <Button className='calcButton' onClick={calculateBmi}>Calculate BMI</Button>
        </Form>
+       </div>
+       </div>
    );
 }
 
