@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { BmiContext } from '../context/BmiContext';
 // rsuite components
-import { Nav,  DatePicker } from 'rsuite';
+import { Nav, DatePicker } from 'rsuite';
 import { useToast } from './useToast';
 
 //Tabbar components
@@ -19,8 +19,8 @@ function addDay() {
     // context
     const { selectedProfile } = useContext(BmiContext);
 
-     //toast
-     const showToast = useToast();
+    //toast
+    const showToast = useToast();
 
     // Foods
     const [searchTerm, setSearchTerm] = useState('');
@@ -39,15 +39,17 @@ function addDay() {
             if (selectedProfile.days) {
                 const dayIndex = selectedProfile.days.findIndex(day => day.date === fDate);
                 if (dayIndex !== -1) {
-                    showToast('info', `Loaded: ${fDate}`);
                     // Load the day's data here
                     const dayData = selectedProfile.days[dayIndex];
                     // Set the state with the loaded data
                     setAddedFoods(dayData.foods);
                     setAddedSports(dayData.sports);
+                    if (!(dayData.foods.length === 0 && dayData.sports.length === 0)) {
+                        showToast('info', `Loaded: ${fDate}`);
+                    }
                 }
                 else {
-                      // empty out the data beauser day was epmty anyways
+                    // empty out the data beauser day was epmty anyways
                     setAddedFoods([]);
                     setAddedSports([]);
                 }
