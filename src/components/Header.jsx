@@ -13,7 +13,6 @@ import '../Style/Main.css';
 const Header = () => {
 
   const { state, selectedProfile, setSelectedProfile } = useContext(BmiContext);
-
   const data = state.map(
     profile => ({ label: profile.name, value: JSON.stringify(profile) })
   );
