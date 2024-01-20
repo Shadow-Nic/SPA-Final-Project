@@ -4,15 +4,20 @@ import React from 'react';
 import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
-//shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons
+//shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons 4. toast
 import { formatNumber, capitalizeAllWords, convertString } from './textFunc'
 import { useSWR, fetcher, DebounceInput, useDebounce } from './apiFunc'
 import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
+import { useToast } from './useToast';
+
 //css
 import '../Style/FoodSearch.css'
 
 // component Start
 const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) => {
+
+    //toast
+    const showToast = useToast();
 
     // debounce (delayed input)
     const [debouncedSearchTerm] = useDebounce(searchTerm, 2000);
@@ -31,7 +36,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
         setDetailMode(false);
         setTempServingSizeG('');
     };
-    
+
     // fetching for the initial food list
     const FoodList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/nutrition?query=${debouncedSearchTerm}` : null, fetcher);
@@ -180,52 +185,59 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => {
-                        // Only perform the following actions if in edit mode
-                        if (!detailMode) {
+                    {!detailMode && (
+                        <Button onClick={() => {
                             const newServingSizeG = parseFloat(tempServingSizeG);
 
-                            // Calculate proportions
-                            const proportion = newServingSizeG / selectedFood.servingSizeG;
+                            // Check if newServingSizeG is a valid positive number
+                            if (isNaN(newServingSizeG) || newServingSizeG <= 0) {
 
-                            // Calculate new nutrient values
-                            const newCalories = selectedFood.calories * proportion;
-                            const newFatTotalG = selectedFood.fatTotalG * proportion;
-                            const newFatSaturatedG = selectedFood.fatSaturatedG * proportion;
-                            const newProteinG = selectedFood.proteinG * proportion;
-                            const newSodiumMg = selectedFood.sodiumMg * proportion;
-                            const newPotassiumMg = selectedFood.potassiumMg * proportion;
-                            const newCholesterolMg = selectedFood.cholesterolMg * proportion;
-                            const newCarbohydratesTotalG = selectedFood.carbohydratesTotalG * proportion;
-                            const newFiberG = selectedFood.fiberG * proportion;
-                            const newSugarG = selectedFood.sugarG * proportion;
+                                showToast('error', `Serving size must be atleast 1g`);
+                            } else {
+                                // Calculate proportions
+                                const proportion = newServingSizeG / selectedFood.servingSizeG;
 
-                            // Update the food item
-                            const updatedItem = {
-                                ...selectedFood,
-                                servingSizeG: newServingSizeG,
-                                calories: newCalories,
-                                fatTotalG: newFatTotalG,
-                                fatSaturatedG: newFatSaturatedG,
-                                proteinG: newProteinG,
-                                sodiumMg: newSodiumMg,
-                                potassiumMg: newPotassiumMg,
-                                cholesterolMg: newCholesterolMg,
-                                carbohydratesTotalG: newCarbohydratesTotalG,
-                                fiberG: newFiberG,
-                                sugarG: newSugarG
-                            };
+                                // Calculate new nutrient values
+                                const newCalories = selectedFood.calories * proportion;
+                                const newFatTotalG = selectedFood.fatTotalG * proportion;
+                                const newFatSaturatedG = selectedFood.fatSaturatedG * proportion;
+                                const newProteinG = selectedFood.proteinG * proportion;
+                                const newSodiumMg = selectedFood.sodiumMg * proportion;
+                                const newPotassiumMg = selectedFood.potassiumMg * proportion;
+                                const newCholesterolMg = selectedFood.cholesterolMg * proportion;
+                                const newCarbohydratesTotalG = selectedFood.carbohydratesTotalG * proportion;
+                                const newFiberG = selectedFood.fiberG * proportion;
+                                const newSugarG = selectedFood.sugarG * proportion;
 
-                            const updatedFoods = addedFoods.map(food => food.name === selectedFood.name ? updatedItem : food);
-                            setAddedFoods(updatedFoods);
-                        }
-                        // Always close the modal
-                        handleClose();
-                    }}>
-                        Ok
-                    </Button>
+                                // Update the food item
+                                const updatedItem = {
+                                    ...selectedFood,
+                                    servingSizeG: newServingSizeG,
+                                    calories: newCalories,
+                                    fatTotalG: newFatTotalG,
+                                    fatSaturatedG: newFatSaturatedG,
+                                    proteinG: newProteinG,
+                                    sodiumMg: newSodiumMg,
+                                    potassiumMg: newPotassiumMg,
+                                    cholesterolMg: newCholesterolMg,
+                                    carbohydratesTotalG: newCarbohydratesTotalG,
+                                    fiberG: newFiberG,
+                                    sugarG: newSugarG
+                                };
+
+                                const updatedFoods = addedFoods.map(food => food.name === selectedFood.name ? updatedItem : food);
+                                setAddedFoods(updatedFoods);
+
+                                // Close the modal
+                                handleClose();
+                            }
+                        }}>
+                            Ok
+                        </Button>
+                    )}
+
                     <Button onClick={handleClose} appearance="subtle">
-                        Cancel
+                         {detailMode ? "Close" : "Cancel"}
                     </Button>
                 </Modal.Footer>
             </Modal>

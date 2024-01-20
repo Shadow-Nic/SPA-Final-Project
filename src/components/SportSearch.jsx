@@ -1,19 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 //rsuite components
 import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
-//shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons
+//shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons 4.Toast
 import { formatNumber, capitalizeAllWords, convertString } from './textFunc'
 import { useSWR, fetcher, DebounceInput, useDebounce } from './apiFunc'
 import { EditIcon, TrashIcon, SearchIcon, MinusIcon } from './icons'
+import { useToast } from './useToast';
 
 //css
 import '../Style/FoodSearch.css'
 
 // component start
 const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSports }) => {
+
+    //toast
+    const showToast = useToast();
 
     // debounce (delayed input)
     const [debouncedSearchTerm] = useDebounce(searchTerm, 2000);
@@ -33,7 +37,7 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
         setTempDuration('');
     };
 
-  
+
     // fetching for the initial sports list
     const SportList = () => {
         const { data, error, isLoading } = useSWR(debouncedSearchTerm ? `https://api.api-ninjas.com/v1/caloriesburned?activity=${debouncedSearchTerm}&weight=${lbs}&duration=10` : null, fetcher);
@@ -157,32 +161,39 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => {
-                        // Only perform the following actions if in edit mode
-                        if (!detailMode) {
+                    {!detailMode && (
+                        <Button onClick={() => {
                             const newDuration = parseFloat(tempDuration);
 
-                            // Calculate proportions
-                            const proportion = newDuration / selectedSport.durationMinutes;
+                            // Check if newDuration is a valid positive number
+                            if (isNaN(newDuration) || newDuration <= 0) {
+                                showToast('error', `Duration must be atlest 1 Minute`);
+                            } else {
+                                // Calculate proportions
+                                const proportion = newDuration / selectedSport.durationMinutes;
 
-                            const newDurationMinutes = selectedSport.durationMinutes * proportion;
-                            const newTotalCalories = selectedSport.totalCalories * proportion;
-                            // Update the sport item
-                            const updatedItem = {
-                                ...selectedSport,
-                                durationMinutes: newDurationMinutes,
-                                totalCalories: newTotalCalories,
-                            };
-                            const updatedSports = addedSports.map(sport => sport.name === selectedSport.name ? updatedItem : sport);
-                            setAddedSports(updatedSports);
-                        }
-                        // Always close the modal
-                        handleClose();
-                    }}>
-                        Ok
-                    </Button>
+                                const newDurationMinutes = selectedSport.durationMinutes * proportion;
+                                const newTotalCalories = selectedSport.totalCalories * proportion;
+
+                                // Update the sport item
+                                const updatedItem = {
+                                    ...selectedSport,
+                                    durationMinutes: newDurationMinutes,
+                                    totalCalories: newTotalCalories,
+                                };
+                                const updatedSports = addedSports.map(sport => sport.name === selectedSport.name ? updatedItem : sport);
+                                setAddedSports(updatedSports);
+
+                                // Close the modal
+                                handleClose();
+                            }
+                        }}>
+                            Ok
+                        </Button>
+                    )}
+
                     <Button onClick={handleClose} appearance="subtle">
-                        Cancel
+                    {detailMode ? "Close" : "Cancel"}
                     </Button>
                 </Modal.Footer>
             </Modal>
