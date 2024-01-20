@@ -10,6 +10,28 @@
     
 }
 
+/* popup */
+.rs-modal-content {
+    width: 70vw;
+    display: flex;
+    
+    flex-direction: column;
+    background-color: #F8C88E;
+    border: 1px solid black;
+}
+
+.rs-modal-body {
+    display: flex;
+    justify-content: center;
+}
+
+.rs-modal-body input {
+    width: 60px;
+    font-size: 20px;
+}
+
+
+
 /* Header */
 
 header {
