@@ -49,11 +49,15 @@ function addDay() {
                         
                         showToast('info', `Loaded: ${fDate}`);
                     }
+                    else{
+                        setActive('food');
+                    }
                 }
                 else {
                     // empty out the data beauser day was epmty anyways
                     setAddedFoods([]);
                     setAddedSports([]);
+                    setActive('food');
                 }
             }
         }
@@ -68,7 +72,7 @@ function addDay() {
                 <Nav  justified {...props} activeKey={active} onSelect={onSelect}>
                     <Nav.Item eventKey="food" >Meal's 🍕 </Nav.Item>
                     <Nav.Item eventKey="sport">Activity's 🤸🏽‍♀️ </Nav.Item>
-                    <Nav.Item eventKey="sum">Summary 📋</Nav.Item>
+                    <Nav.Item disabled={(addedFoods.length === 0 && addedSports.length === 0)} eventKey="sum">Summary 📋</Nav.Item>
                     <DatePicker cleanable={false} value={pickDate} className='chooseDay' format="dd.MM.yy" defaultValue={pickDate} placement="leftStart" placeholder="📅" style={{ width: 115 }} onChange={date => setPickDate(date)} />
                 </Nav>
                 {active == 'food' && <FoodSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} addedFoods={addedFoods} setAddedFoods={setAddedFoods} />}
