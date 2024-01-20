@@ -25,6 +25,10 @@ const MonthlyChart = () => {
         legend: {
             top: '0',
         },
+        "color": [
+            "#34c3ff",
+            "#F8C88E",
+        ],
     };
 
     return (

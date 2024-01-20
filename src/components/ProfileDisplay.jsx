@@ -39,8 +39,6 @@ function ProfileDisplay() {
                     <div><MonthlyChart /></div>
                 </Carousel>
 
-
-
             </div>
         );
     }
@@ -56,7 +54,7 @@ function ProfileDisplay() {
     return (
         <div className='main'>
             {selectedProfile && (
-                
+
                 <div className="Profile">
                     <h2>{selectedProfile.name}'s Profile</h2>
 
@@ -73,7 +71,7 @@ function ProfileDisplay() {
 
 
                 </div>
-                
+
             )}
             <div className='statistik'>
                 <Greeting />

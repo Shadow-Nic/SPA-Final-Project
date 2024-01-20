@@ -51,6 +51,12 @@ const DayChart = () => {
         legend: {
             top: '0',
         },
+        "color": [
+            "#34c3ff",
+            "#F8C88E",
+            "#13ba9e",
+
+        ],
     };
 
     // Methode zur Anzeige des Fortschrittsbalkens
