@@ -1,7 +1,7 @@
 import React from 'react';
 
 //rsuite components
-import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader, Divider } from 'rsuite';
+import { Badge, Notification, TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader, Panel } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
 //shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons 4. toast
@@ -68,40 +68,46 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
             }));
 
             return (
-                <Table
-                    height={400}
-                    data={food}
-                    onRowClick={rowData => {
-                        const existingFood = addedFoods.find(food => food.name === rowData.name);
-                        if (existingFood) {
-                            setSelectedFood(existingFood);
-                            handleOpen();
-                        } else {
-                            setAddedFoods([...addedFoods, rowData]);
-                        }
-                    }}
-                >
-                    <Column >
-                        <HeaderCell>Name</HeaderCell>
-                        <Cell>
-                            {rowData => capitalizeAllWords(rowData.name)}
-                        </Cell>
-                    </Column>
-                    <Column >
-                        <HeaderCell>Serving (g)</HeaderCell>
-                        <Cell dataKey="servingSizeG" />
-                    </Column>
-                    <Column >
-                        <HeaderCell>Calories</HeaderCell>
-                        <Cell dataKey="calories" />
-                    </Column>
-                    <Column >
-                        <HeaderCell>Total Fat (g)</HeaderCell>
-                        <Cell dataKey="fatTotalG" />
-                    </Column>
-                </Table>
+                <>
+                    {data.length > 0 ? (
+                        <Table
+                            height={(data.length * 45) + 50}
+                            data={food}
+                            onRowClick={rowData => {
+                                const existingFood = addedFoods.find(food => food.name === rowData.name);
+                                if (existingFood) {
+                                    setSelectedFood(existingFood);
+                                    handleOpen();
+                                } else {
+                                    setAddedFoods([...addedFoods, rowData]);
+                                }
+                            }}
+                        >
+                            <Column >
+                                <HeaderCell>per 100g</HeaderCell>
+                                <Cell>
+                                    {rowData => capitalizeAllWords(rowData.name)}
+                                </Cell>
+                            </Column>
+                            <Column >
+                                <HeaderCell>Carbohydrates</HeaderCell>
+                                <Cell dataKey="carbohydratesTotalG" />
+                            </Column>
+                            <Column >
+                                <HeaderCell>Calories</HeaderCell>
+                                <Cell dataKey="calories" />
+                            </Column>
+                            <Column >
+                                <HeaderCell>Total Fat (g)</HeaderCell>
+                                <Cell dataKey="fatTotalG" />
+                            </Column>
+                        </Table>
 
+                    ) : (<Notification className='noResult' type="info" header="no results found">
 
+                    </Notification>)}
+
+                </>
             );
         }
     };
@@ -147,11 +153,14 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                 </InputGroup.Addon>
             </InputGroup>
             <FoodList />
-            {addedFoods.length > 0 && <Divider>Added Meals</Divider>}
-            <TagGroup>
-                <AddedFoodsList />
-            </TagGroup>
 
+            {addedFoods.length > 0 &&
+                <Panel defaultExpanded header={<><Badge color="blue" content={addedFoods.length} > <Button appearance="ghost" size='lg'>Added Meal's</Button>  </Badge></>} collapsible>
+                    <TagGroup>
+                        <AddedFoodsList />
+                    </TagGroup>
+                </Panel>
+            }
 
             <Modal
                 open={open}
@@ -237,7 +246,7 @@ const FoodSearch = ({ searchTerm, setSearchTerm, addedFoods, setAddedFoods }) =>
                     )}
 
                     <Button onClick={handleClose} appearance="subtle">
-                         {detailMode ? "Close" : "Cancel"}
+                        {detailMode ? "Close" : "Cancel"}
                     </Button>
                 </Modal.Footer>
             </Modal>

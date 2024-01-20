@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
 
-import { TagGroup, Tag, Button } from 'rsuite';
+import { TagGroup, Tag, Button, Divider } from 'rsuite';
 import { formatNumber, capitalizeAllWords, cutDate } from './textFunc'
 
 import { useToast } from './useToast';
+
+//css
+import '../Style/Search.css'
 
 
 
@@ -53,19 +56,19 @@ const SportSearch = ({ addedFoods, addedSports, pickDate }) => {
 
     return (
         <div>
-            <h4>This is your summary {capitalizeAllWords(selectedProfile.name)}!</h4>
+            <h4>Hey {capitalizeAllWords(selectedProfile.name)}, this is your summary!</h4>
 
-            {addedSports.length > 0 && <h3>Added Sports:</h3>}
+            {addedSports.length > 0 && <Divider>Activitys</Divider>}
             <TagGroup>
                 <AddedSportsList />
             </TagGroup>
-            {addedFoods.length > 0 && <h3>Added Foods:</h3>}
+            {addedFoods.length > 0 && <Divider>Meals</Divider>}
             <TagGroup>
                 <AddedFoodsList />
             </TagGroup>
 
-            <p>note you will not </p>
-            <Button onClick={updateDay}>update my Day!</Button>
+            <Divider />
+            <Button color="green" appearance="primary" size='lg' className='bigButton' onClick={updateDay}>Confirm and update my Day!</Button>
 
         </div>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 //rsuite components
-import { TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader, Divider } from 'rsuite';
+import { Notification, TagGroup, Tag, Table, Modal, Button, List, Placeholder, InputGroup, IconButton, Loader, Panel, Badge } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table; // dest. for ez use
 
 //shared ressources  1. format functions 2. api&related functions 3. Rsuit Icons 4.Toast
@@ -59,27 +59,35 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                 durationMinutes: item.duration_minutes,
                 totalCalories: item.total_calories
             }));
+
             return (
-                <Table
-                    height={400}
-                    data={sport}
-                    onRowClick={rowData => {
-                        const existingSport = addedSports.find(sport => sport.name === rowData.name);
-                        if (existingSport) {
-                            setSelectedSport(existingSport);
-                            handleOpen();
-                        } else {
-                            setAddedSports([...addedSports, rowData]);
-                        }
-                    }}
-                >
-                    <Column width={400} >
-                        <HeaderCell>add 10 minutes with one tap, double tap to add more minutes</HeaderCell>
-                        <Cell>
-                            {rowData => capitalizeAllWords(rowData.name)}
-                        </Cell>
-                    </Column>
-                </Table>
+                <>
+                    {data.length > 0 ? (
+                        <Table
+                            height={(data.length * 45) + 50}
+                            data={sport}
+                            onRowClick={rowData => {
+                                const existingSport = addedSports.find(sport => sport.name === rowData.name);
+                                if (existingSport) {
+                                    setSelectedSport(existingSport);
+                                    handleOpen();
+                                } else {
+                                    setAddedSports([...addedSports, rowData]);
+                                }
+                            }}
+                        >
+                            <Column width={400} >
+                                <HeaderCell>add 10 minutes with one tap, double tap to add more minutes</HeaderCell>
+                                <Cell>
+                                    {rowData => capitalizeAllWords(rowData.name)}
+                                </Cell>
+                            </Column>
+                        </Table>
+                    ) : (<Notification className='noResult' type="info" header="no results found">
+
+                    </Notification>)}
+
+                </>
             );
         }
     };
@@ -123,11 +131,13 @@ const SportSearch = ({ lbs, searchTerm, setSearchTerm, addedSports, setAddedSpor
                 </InputGroup.Addon>
             </InputGroup>
             <SportList />
-            {addedSports.length > 0 && <Divider>Added Activitys</Divider>}
-
-            <TagGroup>
-                <AddedSportsList />
-            </TagGroup>
+            {addedSports.length > 0 &&
+                <Panel defaultExpanded header={<><Badge color="blue" content={addedSports.length} > <Button appearance="ghost" size='lg'>Added Activity's</Button>  </Badge></>} collapsible>
+                    <TagGroup>
+                        <AddedSportsList />
+                    </TagGroup>
+                </Panel>
+            }
 
             <Modal
                 open={open}
