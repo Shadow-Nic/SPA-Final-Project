@@ -32,6 +32,7 @@ function addDay() {
     // Date
     const [pickDate, setPickDate] = useState(new Date());
 
+
     //loading existing Day data
     useEffect(() => {
         if (selectedProfile) {
@@ -45,6 +46,7 @@ function addDay() {
                     setAddedFoods(dayData.foods);
                     setAddedSports(dayData.sports);
                     if (!(dayData.foods.length === 0 && dayData.sports.length === 0)) {
+                        
                         showToast('info', `Loaded: ${fDate}`);
                     }
                 }
@@ -67,7 +69,7 @@ function addDay() {
                     <Nav.Item eventKey="food" >Meal's 🍕 </Nav.Item>
                     <Nav.Item eventKey="sport">Activity's 🤸🏽‍♀️ </Nav.Item>
                     <Nav.Item eventKey="sum">Summary 📋</Nav.Item>
-                    <DatePicker value={pickDate} className='chooseDay' format="dd.MM.yy" defaultValue={new Date()} placement="leftStart" placeholder="📅" style={{ width: 115 }} onChange={date => setPickDate(date)} />
+                    <DatePicker cleanable={false} value={pickDate} className='chooseDay' format="dd.MM.yy" defaultValue={pickDate} placement="leftStart" placeholder="📅" style={{ width: 115 }} onChange={date => setPickDate(date)} />
                 </Nav>
                 {active == 'food' && <FoodSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} addedFoods={addedFoods} setAddedFoods={setAddedFoods} />}
                 {active == 'sport' && <SportSearch searchTerm={searchTermTab} setSearchTerm={setSearchTermTab} lbs={selectedProfile.weightLbs} addedSports={addedSports} setAddedSports={setAddedSports} />}
