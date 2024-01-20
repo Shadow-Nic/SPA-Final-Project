@@ -3,6 +3,8 @@ import { calculateCalories } from './getChartData';
 import { BmiContext } from '../context/BmiContext';
 import { useContext } from 'react';
 
+
+
 function getTodoList(date) {
   const day = date.getDate();
 
@@ -53,8 +55,10 @@ const CalendarPlan = () => {
   }
 
   return (
+    <div className='main'>
     <div className='calendar'>
       <Calendar compact bordered renderCell={renderCell} />
+    </div>
     </div>
   );
 };
