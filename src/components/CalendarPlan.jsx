@@ -1,4 +1,5 @@
 import { Calendar, Badge } from 'rsuite';
+import { calculateDayCalories } from './getChartData';
 
 function getTodoList(date) {
   const day = date.getDate();
@@ -23,21 +24,29 @@ function getTodoList(date) {
   }
 }
 
-const CalendarPlan = () => {
+function getEmoji(date = new Date()) {
+  const { goalCalories, achievedCalories } = calculateDayCalories(date);
+  return achievedCalories > goalCalories ? '😠' : '😊';
+ }
+ 
+ 
+ const CalendarPlan = () => {
   function renderCell(date) {
-    const list = getTodoList(date);
-
-    if (list.length) {
-      return <Badge className="calendar-todo-item-badge" />;
-    }
-
-    return null;
+     const list = getTodoList(date);
+     const emoji = getEmoji(date);
+ 
+     if (list.length) {
+       return <Badge className="calendar-todo-item-badge">{emoji}</Badge>;
+     }
+ 
+     return null;
   }
+ 
   return (
-    <div className='calendar'>
-      <Calendar compact bordered renderCell={renderCell} />{' '}
-    </div>
+     <div className='calendar'>
+       <Calendar compact bordered renderCell={renderCell} />
+     </div>
   );
-};
-
- export default CalendarPlan
+ };
+ 
+ export default CalendarPlan;
