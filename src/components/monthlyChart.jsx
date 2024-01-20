@@ -8,8 +8,8 @@ const MonthlyChart = () => {
 
     const { selectedProfile } = useContext(BmiContext);
     const last30DaysData = selectedProfile.days.slice(0, 30).map(day => {
-        const { goalCalories, achievedCalories, bmr } = calculateCalories(day.foods, day.sports);
-        return { ...day, goalCalories, achievedCalories, bmr };
+        const { goalCalories, achievedCalories } = calculateCalories(day.foods, day.sports);
+        return { ...day, goalCalories, achievedCalories };
     }).reverse();
 
     const chartData = {
