@@ -18,7 +18,7 @@ const MonthlyChart = () => {
     ]);
 
     const minAchievedCalories = useMemo(() => {
-        return Math.min(...last30DaysData.map(item => parseInt(item.achievedCalories))) - 100;
+        return Math.min(...last30DaysData.map(item => parseInt(item.achievedCalories))), 0;
     }, [last30DaysData]);
 
     const style = {
@@ -39,7 +39,7 @@ const MonthlyChart = () => {
             <BarChart data={data} style={style} option={config}>
                 <YAxis
                     minInterval={200}
-                    min={minAchievedCalories - 500}
+                    min={minAchievedCalories}
                     axisLabel={value => `${value / 1}`}
                 />
                 <Bars name="kcal" />

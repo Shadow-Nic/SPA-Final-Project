@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { BmiContext } from '../context/BmiContext';
 import { BarChart, YAxis, Bars, Line } from '@rsuite/charts';
 import { calculateCalories } from './getChartData';
@@ -17,7 +17,9 @@ const WeekChart = () => {
         parseInt(item.goalCalories, 10),
     ]);
 
-    const minAchievedCalories = Math.min(...lastSevenDaysData.map((item) => parseInt(item.achievedCalories, 10))) - 100;
+    const minAchievedCalories = useMemo(() => {
+        return Math.min(...lastSevenDaysData.map(item => parseInt(item.achievedCalories))), 0;
+    }, [lastSevenDaysData]);
 
     const chartStyle = {
         height: 250,
@@ -35,7 +37,7 @@ const WeekChart = () => {
         <div className="Wrapper">
             <h3>Weekly</h3>
             <BarChart data={dailyData} style={chartStyle} option={chartConfig}>
-                <YAxis minInterval={200} min={minAchievedCalories - 500} axisLabel={(value) => `${value / 1}`} />
+                <YAxis minInterval={200} min={minAchievedCalories} axisLabel={(value) => `${value / 1}`} />
                 <Bars name="kcal" />
                 <Line name="required" />
             </BarChart>
