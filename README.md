@@ -1,6 +1,6 @@
 Lose Weight with Our Fitify App
 
-With help of the Fitify-App, it allows users to reach their weight goals through tracking their weight, the food they eat, workouts they make and the calories they lose or gain every day.
+With help of the Fitify-App, it allows users to reach their weight goals through tracking their weight, the food they eat, workouts they make and the calories they lose or gain every day. This App is only use on mobile devices.
 
 URL to the App
 
