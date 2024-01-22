@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { BmiContext } from '../context//BmiContext';
-
+import logo from '/src/assets/Logo-NoBG.png'
 import { Dropdown, Button, SelectPicker } from 'rsuite';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +28,7 @@ const Header = () => {
           <SelectPicker cleanable={false} value={JSON.stringify(selectedProfile)} data={data} onChange={handleProfileSelect} />
         </div>
 
-        <img src="./src/assets/Logo-NoBG.png" alt="Fitify Logo" />
+        <img src={logo} alt="Fitify Logo" />
         <div className="menue">
           <Dropdown title={<FontAwesomeIcon icon={faBars} size="3x" />} noCaret>
             <Dropdown.Item as={Link} to="/">Profile</Dropdown.Item>
