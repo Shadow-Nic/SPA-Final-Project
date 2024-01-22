@@ -36,8 +36,8 @@ const WeekChart = () => {
             <h3>Weekly</h3>
             <BarChart data={dailyData} style={chartStyle} option={chartConfig}>
                 <YAxis minInterval={200} min={minAchievedCalories - 500} axisLabel={(value) => `${value / 1}`} />
-                <Bars name="Kcal" />
-                <Line name="Required" />
+                <Bars name="kcal" />
+                <Line name="required" />
             </BarChart>
         </div>
     );

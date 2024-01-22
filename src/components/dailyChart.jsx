@@ -1,8 +1,7 @@
-import Chart from 'chart.js/auto';
+
 import React, { useContext, useEffect, useState } from 'react';
-import { Doughnut } from 'react-chartjs-2';
 import { Progress } from 'rsuite';
-import { BarChart, PieChart } from '@rsuite/charts';
+import { PieChart } from '@rsuite/charts';
 import { calculateDayCalories } from './getChartData';
 
 const DayChart = () => {
@@ -80,7 +79,7 @@ const DayChart = () => {
             <h3>Daily</h3>
             <div className='wrapperChart'>
                 <div className='chartKcal'>
-                    <p><strong>{parseInt(achievedCalories)} / {goalCalories}kcal</strong></p>
+                    <p><strong>{parseInt(achievedCalories)} / {goalCalories} kcal</strong></p>
                     {renderProgressCircle(status)}
                 </div>
                 <div className='chartNutrition'>

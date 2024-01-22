@@ -1,22 +1,14 @@
 import React, { useContext } from 'react';
 import { BmiContext } from '../context/BmiContext';
-import DayChart from './dailyChart';
 import '../Style/Profile.css'
+import DayChart from './dailyChart';
 import WeekChart from './weekChart';
 import MonthlyChart from './monthlyChart';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'rsuite';
 
 function ProfileDisplay() {
     const { selectedProfile } = useContext(BmiContext);
 
-
-    const date = new Date();
-    const currentDate = date.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: '2-digit'
-    }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, "$1.$2.$3"); //12.12.12 > 12 december 2012
 
 
 
