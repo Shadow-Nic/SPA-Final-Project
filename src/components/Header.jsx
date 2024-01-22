@@ -19,27 +19,27 @@ const Header = () => {
 
   const handleProfileSelect = (event) => {
     setSelectedProfile(JSON.parse(event));
+  };
+
+  return (
+    <header>
+      <div className="header">
+        <div className='picker'>
+          <SelectPicker cleanable={false} value={JSON.stringify(selectedProfile)} data={data} onChange={handleProfileSelect} />
+        </div>
+
+        <img src="./src/assets/Logo-NoBG.png" alt="Fitify Logo" />
+        <div className="menue">
+          <Dropdown title={<FontAwesomeIcon icon={faBars} size="3x" />} noCaret>
+            <Dropdown.Item as={Link} to="/">Profile</Dropdown.Item>
+            <Dropdown.Item as={Link} to="/day">Input Day</Dropdown.Item>
+            <Dropdown.Item as={Link} to="/calculator">Add new Profile</Dropdown.Item>
+            <Dropdown.Item as={Link} to="/calendar">Calendar</Dropdown.Item>
+          </Dropdown>
+        </div>
+      </div>
+    </header>
+  );
 };
 
-    return (
-     <header>
-       <div className="header">
-      <div className='picker'>
-       <SelectPicker cleanable={false} value={JSON.stringify(selectedProfile)} data={data}  onChange={handleProfileSelect}/>
-       </div>
-        
-         <img src="/src/assets/Logo-NoBG.png" alt="Fitify Logo" />
-         <div className="menue">
-           <Dropdown title={<FontAwesomeIcon icon={faBars} size="3x" />} noCaret>
-             <Dropdown.Item as={Link} to="/">Profile</Dropdown.Item>
-             <Dropdown.Item as={Link} to="/day">Input Day</Dropdown.Item>
-             <Dropdown.Item as={Link} to="/calculator">Add new Profile</Dropdown.Item>
-             <Dropdown.Item as={Link} to="/calendar">Calendar</Dropdown.Item>
-           </Dropdown>
-         </div>
-       </div>
-     </header>
-    );
-   };
-   
-   export default Header;
+export default Header;
