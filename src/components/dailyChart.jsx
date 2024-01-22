@@ -28,8 +28,10 @@ const DayChart = () => {
 
     // Effekt zum Aktualisieren des Status
     useEffect(() => {
-        if (percentKcal >= 100) {
+        if (percentKcal >= 100 && percentKcal < 110) {
             setStatus('success');
+        } else if (percentKcal >= 110) {
+            setStatus('fail');
         } else {
             setStatus('');
         }
@@ -59,7 +61,7 @@ const DayChart = () => {
         ],
     };
 
-    // Methode zur Anzeige des Fortschrittsbalkens
+
     const renderProgressCircle = (status) => {
         if (status === 'success') {
             return <Progress.Circle percent={percentKcal} style={styleProgress} status="success" />;
@@ -69,6 +71,8 @@ const DayChart = () => {
             return <Progress.Circle percent={percentKcal} style={styleProgress} />;
         }
     };
+    // Methode zur Anzeige des Fortschrittsbalkens
+
 
     // Render-Methode für die Komponente
     return (
