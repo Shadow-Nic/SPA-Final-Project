@@ -11,6 +11,11 @@
 }
 
 /* popup */
+
+.rs-modal-sm{
+    margin-left: 60px;
+}
+
 .rs-modal-content {
     width: 70vw;
     display: flex;
