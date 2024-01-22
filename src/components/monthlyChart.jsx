@@ -42,7 +42,7 @@ const MonthlyChart = () => {
                     min={minAchievedCalories}
                     axisLabel={value => `${value / 1}`}
                 />
-                <Bars name="kcal" barWidth={2} />
+                <Bars name="kcal" barWidth={5} />
                 <Line name="required" />
             </BarChart>
         </div>
